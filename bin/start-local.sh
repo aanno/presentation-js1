@@ -1,3 +1,7 @@
-#!/bin/sh
+#!/bin/sh -x
 
-bundle exec jekyll serve
+BASE=$(readlink -f $(dirname "$0")/..)
+
+pushd $BASE
+	~/bin/bundle exec jekyll serve --incremental
+popd
