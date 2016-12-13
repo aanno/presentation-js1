@@ -1,12 +1,20 @@
 ---
 layout: slide
-title: ""
+title: "Moderne JavaScript Entwicklung"
 ---
 
-# [Reveal.js](http://lab.hakim.se/reveal-js/){: .external}
+# Moderne JavaScript Entwicklung
 
-## HTML Presentations Made Easy
+## Übersicht
 
-#### Created by [Hakim El Hattab](http://hakim.se){: .external} / [@hakimel](http://twitter.com/hakimel){: .twitter}
+1. Modernes JavaScript
+1. Single Page Applications
+1. Node.js
+1. Isomorphic Web Applications
+1. JS Komponenten
+1. Praktisches Setup
+1. JavaScript Threading Model
+1. RxJS
 
-Remixed by [Thomas Friese](http://tasmo.rocks/){: .external} / [@_Tasmo](http://twitter.com/_Tasmo){: .twitter}
+
+#### Thomas Pasch
