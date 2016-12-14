@@ -9,6 +9,8 @@ id: lodash
 
 [http://colintoh.com/blog/lodash-10-javascript-utility-functions-stop-rewriting](Lodash){: .external}
 
+[https://lodash.com/docs/4.17.2](https://lodash.com/docs/4.17.2){: .external}
+
 </section>
 
 <section markdown="1">
@@ -117,3 +119,5 @@ objA = _.omit(objA, _.isNumber); // {"name": "colin"};
 {% endhighlight %}
 
 </section>
+
+http://stackoverflow.com/questions/21536627/whats-the-difference-between-transform-and-reduce-in-lodash
