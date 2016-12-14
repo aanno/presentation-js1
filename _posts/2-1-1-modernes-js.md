@@ -3,13 +3,6 @@ layout: slide
 title: Modernes JavaScript
 id: modernes-js
 ---
-
-<!--
-# Modernes JavaScript
--->
-
-## Heute
-
 * Komplettes HTML wird von JavaScript erzeugt
 * Es gibt keine Seiten mehr: Die Application wird (nur) am Anfang geladen: <br>
   **Single Page Application** (SPA)

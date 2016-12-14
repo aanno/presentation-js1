@@ -3,3 +3,117 @@ layout: slide
 title: Lodash
 id: lodash
 ---
+<section markdown="1">
+
+> Reduce LOC and improve clarity of your application logic with Lodash
+
+[http://colintoh.com/blog/lodash-10-javascript-utility-functions-stop-rewriting](Lodash){: .external}
+
+</section>
+
+<section markdown="1">
+
+### Loop through a nested collection
+
+{% highlight javascript %}
+
+var ownerArr = [{
+    "owner": "Colin",
+    "pets": [{"name":"dog1"}, {"name": "dog2"}]
+}, {
+    "owner": "John",
+    "pets": [{"name":"dog3"}, {"name": "dog4"}]
+}];
+
+// Array's map method.
+ownerArr.map(function(owner){
+   return owner.pets[0].name;
+});
+
+// Lodash
+_.map(ownerArr, 'pets[0].name');
+
+{% endhighlight %}
+
+
+</section>
+
+<section markdown="1">
+
+### Deep-cloning Javascript object
+
+{% highlight javascript %}
+
+var objA = {
+    "name": "colin"
+}
+
+// Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript
+
+// Lodash
+var objB = _.cloneDeep(objA);
+objB === objA // false
+
+{% endhighlight %}
+
+</section>
+
+<section markdown="1">
+
+### Extending object
+
+{% highlight javascript %}
+
+var objA = {"name": "colin", "car": "suzuki"};
+var objB = {"name": "james", "age": 17};
+var objC = {"pet": "dog"};
+
+// Lodash
+_.assign(objA, objB, objC)
+// {"name": "james", "car": "suzuki", "age": 17, "pet": "dog"}
+
+{% endhighlight %}
+
+</section>
+
+<section markdown="1">
+
+### Removing properties from object
+
+{% highlight javascript %}
+
+// Naive method: Remove an array of keys from object
+Object.prototype.remove = function(arr) {
+    var that = this;
+    arr.forEach(function(key){
+        delete(that[key]);
+    });
+};
+
+var objA = {"name": "colin", "car": "suzuki", "age": 17};
+
+objA.remove(['car', 'age']);
+objA; // {"name": "colin"}
+
+// Lodash
+objA = _.omit(objA, ['car', 'age']); // {"name": "colin"}
+
+{% endhighlight %}
+
+</section>
+
+<section markdown="1">
+
+### Cont...
+
+{% highlight javascript %}
+
+var objA = {"name": "colin", "car": "suzuki", "age": 17};
+
+// Lodash
+objA = _.omit(objA, 'car'); // {"name": "colin", "age": 17};
+objA = _.omit(objA, _.isNumber); // {"name": "colin"};
+
+{% endhighlight %}
+
+</section>

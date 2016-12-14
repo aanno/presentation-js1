@@ -3,11 +3,6 @@ layout: slide
 title: Traditionelle JS Entwicklung
 id: traditionell
 ---
-
-<!--
-## Früher
--->
-
 * **AJAX** und `XMLHttpRequest`: Anpassung/Updates der vom Server gelieferten Seiten
 * Code wird im wesentlichen selbst geschrieben
 * Kein Build System oder Build System vom Server

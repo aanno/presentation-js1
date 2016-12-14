@@ -3,10 +3,6 @@ layout: slide
 title: Moderne JavaScript Entwicklung
 id: title-js
 ---
-<!--
-# Moderne JavaScript Entwicklung
--->
-
 ## Übersicht
 
 1. Modernes JavaScript
