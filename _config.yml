@@ -4,6 +4,7 @@ future:      false
 baseurl:     ""
 # The allowed values are 'rouge', 'pygments' or null.
 highlighter: rouge
+
 # markdown - Valid options are [ maruku | rdiscount | kramdown | redcarpet ]
 markdown:    kramdown
 lsi:         false
@@ -11,7 +12,23 @@ permalink:   "/:title"
 
 kramdown:
   ## for german: "sbquo,lsquo,bdquo,ldquo"
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  smart_quotes: sbquo,lsquo,bdquo,ldquo
+  ## english:
+  ## smart_quotes: lsquo,rsquo,ldquo,rdquo
+
+  # Does not work here! (tp)
+  # https://github.com/jekyll/jekyll/issues/4619
+  syntax_highlighter_opts:
+      # Rouge Options › https://github.com/jneen/rouge#full-options
+      # css_class: 'highlight'
+      #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
+      span:
+        line_numbers: false
+      block:
+        line_numbers: true
+        start_line: 1
+
+# kramdown.syntax_highlighter_opts.block.line_numbers: true
 
 #gems:
 #  - jemoji
@@ -19,7 +36,7 @@ kramdown:
 ## personalize your slide show
 title:       Moderne JavaScript Entwicklung (Teil I)
 author:      Thomas Pasch
-description: Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup 
+description: Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup
 
 sass:
   style:     :compressed

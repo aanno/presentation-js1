@@ -8,7 +8,7 @@ id: traditionell
 ## Früher
 -->
 
-* **AJAX**: Anpassung/Updates der vom Server gelieferten Seiten
+* **AJAX** und `XMLHttpRequest`: Anpassung/Updates der vom Server gelieferten Seiten
 * Code wird im wesentlichen selbst geschrieben
 * Kein Build System oder Build System vom Server
 * JQuery 
