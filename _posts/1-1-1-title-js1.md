@@ -1,9 +1,11 @@
 ---
 layout: slide
-title: "Moderne JavaScript Entwicklung"
+title: Moderne JavaScript Entwicklung
+id: title-js
 ---
-
+<!--
 # Moderne JavaScript Entwicklung
+-->
 
 ## Übersicht
 
@@ -17,4 +19,4 @@ title: "Moderne JavaScript Entwicklung"
 1. RxJS
 
 
-#### Thomas Pasch
+#### Thomas Pasch für SiteOS
