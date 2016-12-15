@@ -8,22 +8,22 @@ id: es6-let
 // let and const
 function f() {
   {
-    let x;
+    let x
     {
       // okay, block scoped name
-      const x = "sneaky";
+      const x = "sneaky"
       // error, const
-      x = "foo";
+      x = "foo"
     }
     // error, already declared in block
-    let x = "inner";
+    let x = "inner"
   }
 }
 
 // DESTRUCTION
 
 // list matching
-var [a, , b] = [1,2,3];
+var [a, , b] = [1,2,3]
 
 // object matching
 var { op: a, lhs: { op: b }, rhs: c }
@@ -35,17 +35,17 @@ var {op, lhs, rhs} = getASTNode()
 
 // Can be used in parameter position
 function g({name: x}) {
-  console.log(x);
+  console.log(x)
 }
 g({name: 5})
 
 // Fail-soft destructuring
-var [a] = [];
-a === undefined;
+var [a] = []
+a === undefined
 
 // Fail-soft destructuring with defaults
-var [a = 1] = [];
-a === 1;
+var [a = 1] = []
+a === 1
 
 {% endhighlight %}
 

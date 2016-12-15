@@ -25,8 +25,8 @@ alert("2π = " + sum(pi, pi))
 // default export and imports
 
 // lib/mathplusplus.js
-export * from "lib/math";
-export var e = 2.71828182846;
+export * from "lib/math"
+export var e = 2.71828182846
 export default function(x) {
     return Math.log(x)
 }

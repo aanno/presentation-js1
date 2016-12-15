@@ -6,12 +6,12 @@ id: es6-generator
 {% highlight javascript %}
 var fibonacci = {
   [Symbol.iterator]: function*() {
-    var pre = 0, cur = 1;
+    var pre = 0, cur = 1
     for (;;) {
-      var temp = pre;
-      pre = cur;
-      cur += temp;
-      yield cur;
+      var temp = pre
+      pre = cur
+      cur += temp
+      yield cur
     }
   }
 }
@@ -19,8 +19,8 @@ var fibonacci = {
 for (var n of fibonacci) {
   // truncate the sequence at 1000
   if (n > 1000)
-    break;
-  console.log(n);
+    break
+  console.log(n)
 }
 {% endhighlight %}
 

@@ -9,32 +9,32 @@ id: ts-advanced
 
 {% highlight typescript %}
 function extend<T, U>(first: T, second: U): T & U {
-    let result = <T & U>{};
+    let result = <T & U>{}
     for (let id in first) {
-        (<any>result)[id] = (<any>first)[id];
+        (<any>result)[id] = (<any>first)[id]
     }
     for (let id in second) {
         if (!result.hasOwnProperty(id)) {
-            (<any>result)[id] = (<any>second)[id];
+            (<any>result)[id] = (<any>second)[id]
         }
     }
-    return result;
+    return result
 }
 
 class Person {
     constructor(public name: string) { }
 }
 interface Loggable {
-    log(): void;
+    log(): void
 }
 class ConsoleLogger implements Loggable {
     log() {
         // ...
     }
 }
-var jim = extend(new Person("Jim"), new ConsoleLogger());
-var n = jim.name;
-jim.log();
+var jim = extend(new Person("Jim"), new ConsoleLogger())
+var n = jim.name
+jim.log()
 {% endhighlight %}
 
 </section>
@@ -46,17 +46,17 @@ jim.log();
 {% highlight typescript %}
 function padLeft(value: string, padding: string | number) {
     if (typeof padding === "number") {
-        return Array(padding + 1).join(" ") + value;
+        return Array(padding + 1).join(" ") + value
     }
     if (typeof padding === "string") {
-        return padding + value;
+        return padding + value
     }
-    throw new Error(`Expected string or number, got '${padding}'.`);
+    throw new Error(`Expected string or number, got '${padding}'.`)
 }
 
-padLeft("Hello world", 4); // returns "    Hello world"
+padLeft("Hello world", 4) // returns "    Hello world"
 
-let indentedString = padLeft("Hello world", true); // errors during compilation
+let indentedString = padLeft("Hello world", true) // errors during compilation
 
 {% endhighlight %}
 
@@ -68,7 +68,7 @@ let indentedString = padLeft("Hello world", true); // errors during compilation
 
 {% highlight typescript %}
 function isFish(pet: Fish | Bird): pet is Fish {
-    return (pet as Fish).swim !== undefined;
+    return (pet as Fish).swim !== undefined
 }
 {% endhighlight %}
 
@@ -79,15 +79,15 @@ function isFish(pet: Fish | Bird): pet is Fish {
 ### Type Aliases
 
 {% highlight typescript %}
-type Name = string;
-type NameResolver = () => string;
-type NameOrResolver = Name | NameResolver;
+type Name = string
+type NameResolver = () => string
+type NameOrResolver = Name | NameResolver
 function getName(n: NameOrResolver): Name {
     if (typeof n === "string") {
-        return n;
+        return n
     }
     else {
-        return n();
+        return n()
     }
 }
 {% endhighlight %}

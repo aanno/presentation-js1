@@ -119,17 +119,17 @@ interface SquareConfig {
 }
 
 function createSquare(config: SquareConfig): {color: string; area: number} {
-    let newSquare = {color: "white", area: 100};
+    let newSquare = {color: "white", area: 100}
     if (config.color) {
-        newSquare.color = config.color;
+        newSquare.color = config.color
     }
     if (config.width) {
-        newSquare.area = config.width * config.width;
+        newSquare.area = config.width * config.width
     }
-    return newSquare;
+    return newSquare
 }
 
-let mySquare = createSquare({color: "black"});
+let mySquare = createSquare({color: "black"})
 {% endhighlight %}
 
 </section>
@@ -140,18 +140,18 @@ let mySquare = createSquare({color: "black"});
 
 {% highlight typescript %}
 function identity<T>(arg: T): T {
-    return arg;
+    return arg
 }
 let output = identity("myString");  // type of output will be 'string'
 
 
 interface Lengthwise {
-    length: number;
+    length: number
 }
 
 function loggingIdentity<T extends Lengthwise>(arg: T): T {
     console.log(arg.length);  // Now we know it has a .length property, so no more error
-    return arg;
+    return arg
 }
 {% endhighlight %}
 
