@@ -5,14 +5,9 @@ id: title-js
 ---
 ## Übersicht
 
-1. Modernes JavaScript
-1. Single Page Applications
-1. Node.js
-1. Isomorphic Web Applications
-1. JS Komponenten
-1. Praktisches Setup
-1. JavaScript Threading Model
-1. RxJS
-
+1. Grundlagen
+1. ES6
+1. Typescript
+1. Entwicklungsumgebung
 
 #### Thomas Pasch für SiteOS

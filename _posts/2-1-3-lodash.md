@@ -21,16 +21,16 @@ id: lodash
 
 var ownerArr = [{
     "owner": "Colin",
-    "pets": [{"name":"dog1"}, {"name": "dog2"}]
+    "pets": [{"name":"dog1"}, {"name": "dog2"}],
 }, {
     "owner": "John",
-    "pets": [{"name":"dog3"}, {"name": "dog4"}]
+    "pets": [{"name":"dog3"}, {"name": "dog4"}],
 }];
 
 // Array's map method.
 ownerArr.map(function(owner){
-   return owner.pets[0].name;
-});
+   return owner.pets[0].name
+})
 
 // Lodash
 _.map(ownerArr, 'pets[0].name');
@@ -66,9 +66,9 @@ objB === objA // false
 
 {% highlight javascript %}
 
-var objA = {"name": "colin", "car": "suzuki"};
-var objB = {"name": "james", "age": 17};
-var objC = {"pet": "dog"};
+var objA = {"name": "colin", "car": "suzuki"}
+var objB = {"name": "james", "age": 17}
+var objC = {"pet": "dog"}
 
 // Lodash
 _.assign(objA, objB, objC)
@@ -88,17 +88,16 @@ _.assign(objA, objB, objC)
 Object.prototype.remove = function(arr) {
     var that = this;
     arr.forEach(function(key){
-        delete(that[key]);
-    });
-};
+        delete(that[key])
+    })
+}
 
-var objA = {"name": "colin", "car": "suzuki", "age": 17};
-
-objA.remove(['car', 'age']);
+var objA = {"name": "colin", "car": "suzuki", "age": 17}
+objA.remove(['car', 'age'])
 objA; // {"name": "colin"}
 
 // Lodash
-objA = _.omit(objA, ['car', 'age']); // {"name": "colin"}
+objA = _.omit(objA, ['car', 'age']) // {"name": "colin"}
 
 {% endhighlight %}
 
@@ -110,14 +109,18 @@ objA = _.omit(objA, ['car', 'age']); // {"name": "colin"}
 
 {% highlight javascript %}
 
-var objA = {"name": "colin", "car": "suzuki", "age": 17};
+var objA = {"name": "colin", "car": "suzuki", "age": 17}
 
 // Lodash
-objA = _.omit(objA, 'car'); // {"name": "colin", "age": 17};
-objA = _.omit(objA, _.isNumber); // {"name": "colin"};
+objA = _.omit(objA, 'car') // {"name": "colin", "age": 17}
+objA = _.omit(objA, _.isNumber) // {"name": "colin"}
 
 {% endhighlight %}
 
 </section>
 
-http://stackoverflow.com/questions/21536627/whats-the-difference-between-transform-and-reduce-in-lodash
+<section markdown="1">
+
+* http://stackoverflow.com/questions/21536627/whats-the-difference-between-transform-and-reduce-in-lodash
+
+</section>

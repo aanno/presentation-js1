@@ -6,9 +6,6 @@ id: es5-array
 {% highlight javascript %}
 var fruits = ["Banana", "Orange", "Apple", "Mango"]
 
-// Sorts the elements of fruits 
-fruits.sort()
-
 // convert to string
 document.getElementById("demo").innerHTML = fruits.toString()
 // # Banana,Orange,Apple,Mango
@@ -25,4 +22,9 @@ fruits[0] = "Kiwi"
 fruits.splice(2, 0, "Lemon", "Kiwi")
 // # ["Kiwi", "Orange", "Lemon", "Kiwi", "Apple", "Mango"]
 
+// Sorts the elements of fruits 
+fruits.sort()
+
+// length of array
+fruits.length
 {% endhighlight %}

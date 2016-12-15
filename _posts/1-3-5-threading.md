@@ -68,10 +68,10 @@ Courtesy of [JS Event Loop Explained](http://blog.carbonfive.com/2013/10/27/the-
 
 <section markdown="1">
 
-http://stackoverflow.com/questions/2387724/node-js-on-multi-core-machines
-http://blog.carbonfive.com/2014/02/28/taking-advantage-of-multi-processor-environments-in-node-js/
-http://stackoverflow.com/questions/14795145/how-the-single-threaded-non-blocking-io-model-works-in-node-js
-https://softwareengineeringdaily.com/2015/08/02/how-does-node-js-work-asynchronously-without-multithreading/
+* http://stackoverflow.com/questions/2387724/node-js-on-multi-core-machines]
+* http://blog.carbonfive.com/2014/02/28/taking-advantage-of-multi-processor-environments-in-node-js/
+* http://stackoverflow.com/questions/14795145/how-the-single-threaded-non-blocking-io-model-works-in-node-js
+* https://softwareengineeringdaily.com/2015/08/02/how-does-node-js-work-asynchronously-without-multithreading/
 
 </section>
 
