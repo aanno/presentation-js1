@@ -5,8 +5,6 @@ id: fetch
 ---
 <section markdown="1">
 
-### Loop through a nested collection
-
 {% highlight javascript %}
 var myImage = document.querySelector('img')
 

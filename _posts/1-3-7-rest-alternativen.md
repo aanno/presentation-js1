@@ -5,5 +5,5 @@ id: server-rest-alternativen
 ---
 * GraphQL
 * Protocoll Buffers
-* (Binary JSON)[http://bsonspec.org/]{: .external}
+* [Binary JSON](http://bsonspec.org/){: .external}
 * ...
