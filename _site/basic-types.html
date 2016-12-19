@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+
+  <h3 id="basics">Basics</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">isDone</span><span class="err">:</span> <span class="kr">boolean</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="kd">let</span> <span class="nx">decimal</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="kd">let</span> <span class="nx">hex</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mh">0xf00d</span>
+<span class="kd">let</span> <span class="nx">binary</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">b1010</span>
+<span class="kd">let</span> <span class="nx">octal</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">o744</span>
+
+<span class="kd">let</span> <span class="nx">color</span><span class="err">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="s2">"blue"</span>
+
+<span class="kd">let</span> <span class="nx">list</span><span class="err">:</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="tuples">Tuples</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// Declare a tuple type</span>
+<span class="kd">let</span> <span class="nx">x</span><span class="err">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span>
+<span class="c1">// Initialize it</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"hello"</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="c1">// OK</span>
+<span class="c1">// Initialize it incorrectly</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">]</span> <span class="c1">// Error</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1">// OK</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> 
+<span class="c1">// Error, 'number' does not have 'substr'</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="any-und-object">Any und Object</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">notSure</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">notSure</span> <span class="o">=</span> <span class="s2">"maybe a string instead"</span>
+<span class="nx">notSure</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">// okay, definitely a boolean</span>
+
+<span class="kd">let</span> <span class="nx">notSure</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">notSure</span><span class="p">.</span><span class="nx">ifItExists</span><span class="p">()</span> <span class="c1">// okay, ifItExists might exist at runtime</span>
+<span class="nx">notSure</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">()</span> 
+<span class="c1">// okay, toFixed exists (but the compiler doesn't check)</span>
+
+<span class="kd">let</span> <span class="nx">prettySure</span><span class="err">:</span> <span class="nb">Object</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">prettySure</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">()</span> 
+<span class="c1">// Error: Property 'toFixed' doesn't exist on type 'Object'.</span>
+
+<span class="kd">let</span> <span class="nx">list</span><span class="err">:</span> <span class="kr">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"free"</span><span class="p">]</span>
+
+<span class="nx">list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="void-null-undefined-and-never">Void, Null, Undefined, and Never</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">warnUser</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="na">unusable</span><span class="p">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
+
+<span class="c1">// Not much else we can assign to these variables!</span>
+<span class="kd">let</span> <span class="na">u</span><span class="p">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="na">n</span><span class="p">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+
+<span class="c1">// Function returning never must have unreachable end point</span>
+<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="na">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Inferred return type is never</span>
+<span class="kd">function</span> <span class="nx">fail</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">error</span><span class="p">(</span><span class="s2">"Something failed"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Function returning never must have unreachable end point</span>
+<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">():</span> <span class="nx">never</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-assertions-casts">Type assertions (Casts)</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">someValue</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="s2">"this is a string"</span>
+
+<span class="kd">let</span> <span class="nx">strLength</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="p">(</span><span class="nx">someValue</span> <span class="k">as</span> <span class="kr">string</span><span class="p">).</span><span class="nx">length</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="interfaces">Interfaces</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">SquareConfig</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="kr">string</span> <span class="c1">// required property</span>
+    <span class="nx">width</span><span class="p">?:</span> <span class="kr">number</span>  <span class="c1">// optional property</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">config</span><span class="err">:</span> <span class="nx">SquareConfig</span><span class="p">)</span><span class="err">:</span> <span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">area</span><span class="p">:</span> <span class="kr">number</span><span class="p">}</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newSquare</span> <span class="o">=</span> <span class="p">{</span><span class="na">color</span><span class="p">:</span> <span class="s2">"white"</span><span class="p">,</span> <span class="na">area</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newSquare</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">color</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newSquare</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">config</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">newSquare</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">mySquare</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">({</span><span class="na">color</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">})</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="generics">Generics</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arg</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">);</span>  <span class="c1">// type of output will be 'string'</span>
+
+<span class="kr">interface</span> <span class="nx">Lengthwise</span> <span class="p">{</span>
+    <span class="nl">length</span><span class="p">:</span> <span class="kr">number</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">loggingIdentity</span><span class="o">&lt;</span><span class="nx">T</span> <span class="k">extends</span> <span class="nx">Lengthwise</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+    <span class="c1">// Now we know it has a .length property, so no more error</span>
+    <span class="k">return</span> <span class="nx">arg</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://github.com/Microsoft/TypeScript/wiki/What‘s-new-in-TypeScript</li>
+    <li>https://www.typescriptlang.org/docs/handbook/basic-types.html</li>
+    <li>https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html</li>
+    <li>https://www.typescriptlang.org/docs/handbook/symbols.html</li>
+  </ul>
+
+</section>
+
+    </div>
+  </div>
+</body>
+</html>
+

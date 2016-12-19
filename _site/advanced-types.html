@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+
+  <h3 id="intersection-types">Intersection Types</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">extend</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">first</span><span class="err">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">second</span><span class="err">:</span> <span class="nx">U</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">U</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">first</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(</span><span class="nx">result</span> <span class="k">as</span> <span class="kr">any</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="nx">first</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">second</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="p">(</span><span class="nx">result</span> <span class="k">as</span> <span class="kr">any</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="nx">second</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Loggable</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span>
+<span class="p">}</span>
+<span class="kr">class</span> <span class="nx">ConsoleLogger</span> <span class="k">implements</span> <span class="nx">Loggable</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">jim</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">"Jim"</span><span class="p">),</span> <span class="k">new</span> <span class="nx">ConsoleLogger</span><span class="p">())</span>
+<span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">jim</span><span class="p">.</span><span class="nx">name</span>
+<span class="nx">jim</span><span class="p">.</span><span class="nx">log</span><span class="p">()</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="union-types">Union Types</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">padLeft</span><span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">padding</span><span class="err">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">padding</span> <span class="o">===</span> <span class="s2">"number"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">padding</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span> <span class="o">+</span> <span class="nx">value</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">padding</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">padding</span> <span class="o">+</span> <span class="nx">value</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="err">`</span><span class="nx">Expected</span> <span class="kr">string</span> <span class="nx">or</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">got</span> <span class="s1">'${padding}'</span><span class="p">.</span><span class="err">`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">padLeft</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> 
+<span class="c1">// returns "    Hello world"</span>
+<span class="kd">let</span> <span class="nx">indentedString</span> <span class="o">=</span> <span class="nx">padLeft</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> 
+<span class="c1">// errors during compilation</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-guards">Type guards</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">isFish</span><span class="p">(</span><span class="nx">pet</span><span class="err">:</span> <span class="nx">Fish</span> <span class="o">|</span> <span class="nx">Bird</span><span class="p">)</span><span class="err">:</span> <span class="nx">pet</span> <span class="k">is</span> <span class="nx">Fish</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">pet</span> <span class="k">as</span> <span class="nx">Fish</span><span class="p">).</span><span class="nx">swim</span> <span class="o">!==</span> <span class="kc">undefined</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-aliases">Type Aliases</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">type</span> <span class="nx">Name</span> <span class="o">=</span> <span class="kr">string</span>
+<span class="kd">type</span> <span class="nx">NameResolver</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">string</span>
+<span class="kd">type</span> <span class="nx">NameOrResolver</span> <span class="o">=</span> <span class="nx">Name</span> <span class="o">|</span> <span class="nx">NameResolver</span>
+<span class="kd">function</span> <span class="nx">getName</span><span class="p">(</span><span class="nx">n</span><span class="err">:</span> <span class="nx">NameOrResolver</span><span class="p">)</span><span class="err">:</span> <span class="nx">Name</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://www.typescriptlang.org/docs/handbook/advanced-types.html</li>
+    <li>https://www.typescriptlang.org/docs/handbook/modules.html</li>
+    <li>
+      <p>https://basarat.gitbooks.io/typescript/content/docs/async-await.html</p>
+    </li>
+    <li>https://github.com/Microsoft/TypeScript/issues/3203</li>
+    <li>http://blog.wolksoftware.com/working-with-react-and-typescript</li>
+    <li>https://www.typescriptlang.org/docs/handbook/react-&amp;-webpack.html</li>
+    <li>https://github.com/Microsoft/TypeScript/issues/5478</li>
+  </ul>
+
+</section>
+
+    </div>
+  </div>
+</body>
+</html>
+

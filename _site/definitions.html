@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">foo</span><span class="err">:</span> <span class="kr">number</span>
+<span class="kr">declare</span> <span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">greeting</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="k">void</span>
+
+<span class="kr">declare</span> <span class="k">namespace</span> <span class="nx">myLib</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">makeGreeting</span><span class="p">(</span><span class="nx">s</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="kr">string</span>
+    <span class="kd">let</span> <span class="nx">numberOfGreetings</span><span class="err">:</span> <span class="kr">number</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>Type Definition File sind <strong>notwendig</strong> um aus TypeScript normales JavaScript zu benutzen</li>
+    <li>Enthalten Deklarationen</li>
+    <li><code class="highlighter-rouge">declare</code> kann in *.d.ts Dateien weg gelassen werden (d.h. ist implizit)</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h3 id="direktes-verwendung-von-js-aus-ts">Direktes Verwendung von JS aus TS</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">import</span> <span class="nx">MyImgJs</span> <span class="k">from</span> <span class="s1">'../../Common/MyImg.js'</span>
+
+<span class="kd">const</span> <span class="nx">MyImg</span><span class="err">:</span> <span class="k">new</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">any</span> <span class="o">=</span> <span class="nx">MyImgJs</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://typescript.codeplex.com/wikipage?title=Writing%20Definition%20%28.d.ts%29%20Files</li>
+    <li>http://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html</li>
+  </ul>
+
+</section>
+
+    </div>
+  </div>
+</body>
+</html>
+

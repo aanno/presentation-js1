@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// __proto__</span>
+    <span class="na">__proto__</span><span class="p">:</span> <span class="nx">theProtoObj</span><span class="p">,</span>
+    <span class="c1">// Shorthand for ‘handler: handler’</span>
+    <span class="nx">handler</span><span class="p">,</span>
+    <span class="c1">// Methods</span>
+    <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+     <span class="c1">// Super calls</span>
+     <span class="k">return</span> <span class="s2">"d "</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="c1">// Computed (dynamic) property names</span>
+    <span class="p">[</span> <span class="s1">'prop_'</span> <span class="o">+</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">)()</span> <span class="p">]:</span> <span class="mi">42</span>
+<span class="p">}</span></code></pre></figure>
+
+
+    </div>
+  </div>
+</body>
+</html>
+

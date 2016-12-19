@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+
+  <!--
+![JS Event Loop](http://localhost:4000/assets/images/event-loop.png){: .image}
+klkljkj jhjh
+-->
+
+  <p><img src="http://localhost:4000/assets/images/event-loop.png" alt="JS Event Loop" style="width: 1200px;" class="stretch" />
+Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-loop-explained/" class="external small">JS Event Loop Explained</a>.</p>
+
+</section>
+
+<section>
+
+  <p><strong>Non-blocking</strong> IO, daher oft <em>Callbacks</em></p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nx">request</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> 
+        <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Done!'</span><span class="p">)</span>
+    </code></pre></figure>
+
+  <p><strong>Event Loop</strong> basiert <br /></p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="k">while</span><span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">waitForMessage</span><span class="p">()){</span>
+      <span class="nx">queue</span><span class="p">.</span><span class="nx">processNextMessage</span><span class="p">();</span>
+    <span class="p">}</span>
+    </code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>Run-to-completion: Eine Funktion kann nicht unterbrochen werden</li>
+    <li>Adding messages: <code>setTimeout</code></li>
+    <li>Mehrere Threads (iframe, webworker) können nur über Message Pasing kommunizieren (<code>postMessage</code>)</li>
+    <li>Kein Locking!</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h2 id="wie-skaliert-das-auf-dem-server">Wie skaliert das auf dem Server?</h2>
+
+  <ul>
+    <li>NodeJS beinhalted ein <a href="http://nodejs.org/docs/latest/api/cluster.html" class="external">Cluster Module</a></li>
+    <li>Mehrere NodeJS Instanzen benutzen auch mehrere Prozessor Kerne (z.B. hinter einem Nginx)</li>
+    <li>Socket.io kann für Realtime Interaktionen von mehreren Client verwendet werden</li>
+    <li>Zudem gibt es Module wie <code class="highlighter-rouge">pm2</code> und <code class="highlighter-rouge">loopback</code></li>
+  </ul>
+
+</section>
+
+<section>
+
+  <p><a href="Intro to Node.JS" class="external">http://www.aaronstannard.com/intro-to-nodejs-for-net-developers/</a></p>
+
+  <blockquote>
+    <p>Node’s true innovation is its evented + asynchronous I/O model.</p>
+  </blockquote>
+
+  <aside class="notes">
+    <p>http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations</p>
+  </aside>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>http://stackoverflow.com/questions/2387724/node-js-on-multi-core-machines]</li>
+    <li>http://blog.carbonfive.com/2014/02/28/taking-advantage-of-multi-processor-environments-in-node-js/</li>
+    <li>http://stackoverflow.com/questions/14795145/how-the-single-threaded-non-blocking-io-model-works-in-node-js</li>
+    <li>https://softwareengineeringdaily.com/2015/08/02/how-does-node-js-work-asynchronously-without-multithreading/</li>
+  </ul>
+
+</section>
+
+
+    </div>
+  </div>
+</body>
+</html>
+

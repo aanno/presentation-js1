@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+  <ul>
+    <li>Nur wenige Änderungen, hauptsächlich Standarisierung</li>
+    <li>Strict mode (<code class="highlighter-rouge">'use strict';</code>)
+      <ul>
+        <li><code class="highlighter-rouge">this</code> wird nicht an das gobale Object gebunden</li>
+        <li>Keine impliziten globalen Variablen in Funktionen</li>
+        <li>Einschränkungen bei <code class="highlighter-rouge">eval</code></li>
+        <li><code class="highlighter-rouge">arguments.caller</code> und <code class="highlighter-rouge">arguments.callee</code> sind verboten</li>
+        <li>Doppelte Namen in Objekt Literalen und in Funktionsparametern führen zu Fehler</li>
+        <li>…</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>Trailing comma</li>
+    <li>Metaprogrammierung
+      <ul>
+        <li><code class="highlighter-rouge">Object.create()</code></li>
+        <li>Property Descriptors: <code class="highlighter-rouge">defineProperty()</code>, …</li>
+        <li>Property Iteration: <code class="highlighter-rouge">keys()</code>, <code class="highlighter-rouge">getOwnPropertyNames()</code></li>
+        <li>Protecting Properties: <code class="highlighter-rouge">preventExtensions()</code>, <code class="highlighter-rouge">seal()</code>, <code class="highlighter-rouge">freeze()</code>, …</li>
+        <li><code class="highlighter-rouge">Function.prototype.bind()</code></li>
+      </ul>
+    </li>
+    <li>Zusätzliche Array Funktionen: <code class="highlighter-rouge">every</code>, <code class="highlighter-rouge">filter</code>, <code class="highlighter-rouge">forEach</code>, <code class="highlighter-rouge">map</code>, …</li>
+    <li>JSON (<code class="highlighter-rouge">parse</code> und <code class="highlighter-rouge">stringify</code>)</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="quintessenz-es5">Quintessenz ES5</h3>
+  <ul>
+    <li>Normalerweise sollte man ES6 verwenden</li>
+    <li>Wenn schon ES5, dann mit <code class="highlighter-rouge">'use strict';</code></li>
+    <li>Bitte keine ES3 spezifischen Konstrukte</li>
+  </ul>
+</section>
+
+    </div>
+  </div>
+</body>
+</html>
+

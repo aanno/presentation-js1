@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">class</span> <span class="nx">SkinnedMesh</span> <span class="kr">extends</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span>
+    
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">.</span><span class="nx">defaultMatrix</span><span class="p">()</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bones</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">boneMatrices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+  <span class="nx">update</span><span class="p">(</span><span class="nx">camera</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="kr">super</span><span class="p">.</span><span class="nx">update</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">boneCount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">set</span> <span class="nx">matrixType</span><span class="p">(</span><span class="nx">matrixType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">[</span><span class="nx">matrixType</span><span class="p">]()</span>
+  <span class="p">}</span>
+  <span class="kr">static</span> <span class="nx">defaultMatrix</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Matrix4</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>ES6 Klassen sind nur ‚Syntactic Sugar‘</li>
+    <li>ES6 ist (weiterhin) prototype-basiert</li>
+    <li>Wichtigste Konsequenz: <code class="highlighter-rouge">this</code> ist praktisch immer notwendig<br />
+z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code></li>
+    <li>‚Statics‘ werden in der ‚constructor function‘ definiert</li>
+  </ul>
+
+</section>
+
+    </div>
+  </div>
+</body>
+</html>
+

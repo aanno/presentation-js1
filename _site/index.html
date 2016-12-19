@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html class="dark">
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			
+	<section  class="step slide" >
+  <h1>Moderne JavaScript Entwicklung</h1>
+
+  <h2 id="bersicht">Übersicht</h2>
+
+<ol>
+  <li>Grundlagen</li>
+  <li>ES6</li>
+  <li>Typescript</li>
+  <li>Entwicklungsumgebung</li>
+</ol>
+
+<h4 id="thomas-pasch-fr-siteoshttpsiteosde-external">Thomas Pasch für <a href="http://siteos.de/" class="external">SiteOS</a></h4>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Historie</h1>
+
+  <ul>
+  <li>Juni 1997: Erste Version von Netscape für Navigator 2.0</li>
+  <li>…</li>
+  <li>Juni 2011: ES3</li>
+  <li>Juni 2015: ES5 (eigentlich ES2015)</li>
+  <li>Juni 2016: ES6 (eigentlich ES2016)</li>
+  <li>Arbeiten an ES7 haben bereits <a href="http://wiki.ecmascript.org/doku.php?id=strawman:strawman" class="external">begonnen</a></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Traditionelle JS Entwicklung</h1>
+
+  <ul>
+  <li><strong>AJAX</strong> und <code class="highlighter-rouge">XMLHttpRequest</code>: Anpassung/Updates der vom Server gelieferten Seiten</li>
+  <li>Code wird im wesentlichen selbst geschrieben</li>
+  <li>Kein Build System oder Build System vom Server</li>
+  <li>JQuery</li>
+  <li>JavaScript wie im Browser</li>
+  <li>Browserunterschiede müssen im Code beachtet werden</li>
+  <li>Nicht (ganz) veraltet: Wird für Content-getriebene Seiten immer noch verwendet</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Browserunterstützung</h1>
+
+  <ul>
+  <li>Alle Browser unterstützen heute ES5 <a href="https://kangax.github.io/compat-table/es5/" class="external">vollständig</a></li>
+  <li>ES6 Unterstützung weit <a href="https://kangax.github.io/compat-table/es6/" class="external">fortgeschritten</a>
+    <ul>
+      <li>Muss teilweise konfiguriert werden</li>
+      <li>Fast komplett in Firefox, Chrome und Edge</li>
+      <li>Gute Nacht, IE11!</li>
+    </ul>
+  </li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>ES5 Feature</h1>
+
+  <section>
+  <ul>
+    <li>Nur wenige Änderungen, hauptsächlich Standarisierung</li>
+    <li>Strict mode (<code class="highlighter-rouge">'use strict';</code>)
+      <ul>
+        <li><code class="highlighter-rouge">this</code> wird nicht an das gobale Object gebunden</li>
+        <li>Keine impliziten globalen Variablen in Funktionen</li>
+        <li>Einschränkungen bei <code class="highlighter-rouge">eval</code></li>
+        <li><code class="highlighter-rouge">arguments.caller</code> und <code class="highlighter-rouge">arguments.callee</code> sind verboten</li>
+        <li>Doppelte Namen in Objekt Literalen und in Funktionsparametern führen zu Fehler</li>
+        <li>…</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>Trailing comma</li>
+    <li>Metaprogrammierung
+      <ul>
+        <li><code class="highlighter-rouge">Object.create()</code></li>
+        <li>Property Descriptors: <code class="highlighter-rouge">defineProperty()</code>, …</li>
+        <li>Property Iteration: <code class="highlighter-rouge">keys()</code>, <code class="highlighter-rouge">getOwnPropertyNames()</code></li>
+        <li>Protecting Properties: <code class="highlighter-rouge">preventExtensions()</code>, <code class="highlighter-rouge">seal()</code>, <code class="highlighter-rouge">freeze()</code>, …</li>
+        <li><code class="highlighter-rouge">Function.prototype.bind()</code></li>
+      </ul>
+    </li>
+    <li>Zusätzliche Array Funktionen: <code class="highlighter-rouge">every</code>, <code class="highlighter-rouge">filter</code>, <code class="highlighter-rouge">forEach</code>, <code class="highlighter-rouge">map</code>, …</li>
+    <li>JSON (<code class="highlighter-rouge">parse</code> und <code class="highlighter-rouge">stringify</code>)</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="quintessenz-es5">Quintessenz ES5</h3>
+  <ul>
+    <li>Normalerweise sollte man ES6 verwenden</li>
+    <li>Wenn schon ES5, dann mit <code class="highlighter-rouge">'use strict';</code></li>
+    <li>Bitte keine ES3 spezifischen Konstrukte</li>
+  </ul>
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>NodeJS</h1>
+
+  <ul>
+  <li>Serverseitige Ausführung von JS Code</li>
+  <li>Ermöglicht JS ausserhalb des Browsers auszuführen</li>
+  <li>Distribution enthält auch den <code class="highlighter-rouge">npm</code> Paketmanager</li>
+  <li>Node ist <em>die</em> Grundlage JS Entwicklungs-Infrastruktur <br />
+(Builder, Packer, Tester, Linter, …)</li>
+  <li>Moderne JS Entwicklung ist ohne NodeJS schlicht nicht möglich</li>
+  <li>Technisch: V8 (aus Chrome) + Module + <a href="http://libuv.org/" class="external"><code class="highlighter-rouge">libuv</code></a></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Grundlagen JavaScript</h1>
+
+  <section>
+
+  <ul>
+    <li><a href="https://developer.mozilla.org/de/docs/Glossary/einfache_datenelemente" class="external"><em>Skalare</em></a>: <code class="highlighter-rouge">boolean, number, string, null, undefined, Symbol (ES6)</code></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects" class="external"><em>builtins</em></a>: <code class="highlighter-rouge">Array, Date, Error, Function, JSON, NaN, RegExp, ...</code></li>
+    <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype" class="external">Object.prototype</a></li>
+    <li>Object
+      <ul>
+        <li>Properties: <code class="highlighter-rouge">value, writable, enumerable, configurable</code></li>
+        <li>Accessors: <code class="highlighter-rouge">get, set, enumerable (for ... in), configurable</code></li>
+        <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" class="external">Prototypenkette</a></li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>Arrays
+      <ul>
+        <li>Arrays sind einfach Objekte</li>
+        <li><code class="highlighter-rouge">for ... in</code> ist definiert (siehe <code class="highlighter-rouge">enumerable</code>)</li>
+      </ul>
+    </li>
+    <li><a href="http://www.nfriedly.com/techblog/2009/06/advanced-javascript-objects-arrays-and-array-like-objects/" class="external">Array-like Objects</a>
+      <ul>
+        <li><code class="highlighter-rouge">length</code> property</li>
+        <li>numbered elements: Die properties sind (Ganz-)Zahlen</li>
+        <li>Beispiel: <code class="highlighter-rouge">arguments</code> Variable</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+
+  <ul>
+    <li>Browser
+      <ul>
+        <li><a href="https://developer.mozilla.org/en/docs/Web/API/Window"><code class="highlighter-rouge">window</code></a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" class="external">DOM</a></li>
+        <li>DOM Events und <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers" class="external">Handler</a></li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JavaScript Objekte</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// creates the property x on the global object</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="c1">// creates the property y on the global object, </span>
+<span class="c1">// and marks it as non-configurable</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">43</span>
+<span class="nx">myobj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">h</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="na">k</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Dot notation</span>
+<span class="nx">myobj</span><span class="p">.</span><span class="nx">h</span> <span class="c1">// 4</span>
+<span class="nx">myobj</span><span class="p">.</span><span class="nx">nothing</span> <span class="c1">// undefined</span>
+
+<span class="c1">// Index notation</span>
+<span class="nx">myobj</span><span class="p">[</span><span class="s2">"h"</span><span class="p">]</span>
+<span class="nx">myobj</span><span class="p">[</span><span class="s2">"nothing"</span><span class="p">]</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// x is a property of the global object and can be deleted</span>
+<span class="k">delete</span> <span class="nx">x</span>       <span class="c1">// returns true</span>
+
+<span class="c1">// y is not configurable, so it cannot be deleted                </span>
+<span class="k">delete</span> <span class="nx">y</span>       <span class="c1">// returns false </span>
+
+<span class="c1">// delete doesn't affect certain predefined properties</span>
+<span class="k">delete</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="c1">// returns false </span>
+
+<span class="c1">// user-defined properties can be deleted</span>
+<span class="k">delete</span> <span class="nx">myobj</span><span class="p">.</span><span class="nx">h</span> <span class="c1">// returns true </span></code></pre></figure>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JavaScript Arrays</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Banana"</span><span class="p">,</span> <span class="s2">"Orange"</span><span class="p">,</span> <span class="s2">"Apple"</span><span class="p">,</span> <span class="s2">"Mango"</span><span class="p">]</span>
+
+<span class="c1">// convert to string</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="c1">// # Banana,Orange,Apple,Mango</span>
+
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">" * "</span><span class="p">)</span>
+<span class="c1">// # Banana * Orange * Apple * Mango</span>
+
+<span class="c1">// Changes the first element of fruits to "Kiwi"</span>
+<span class="nx">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Kiwi"</span>
+
+<span class="c1">// The first parameter (2) defines </span>
+<span class="c1">// the position where new elements should be spliced in.</span>
+<span class="c1">// The second parameter (0) defines </span>
+<span class="c1">// how many elements should be removed.</span>
+<span class="c1">// The rest of the parameters ("Lemon" , "Kiwi") define </span>
+<span class="c1">// the new elements to be added.</span>
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"Lemon"</span><span class="p">,</span> <span class="s2">"Kiwi"</span><span class="p">)</span>
+<span class="c1">// # ["Kiwi", "Orange", "Lemon", "Kiwi", "Apple", "Mango"]</span>
+
+<span class="c1">// Sorts the elements of fruits </span>
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
+
+<span class="c1">// length of array</span>
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JavaScript Module Systeme</h1>
+
+  <section>
+
+  <h3 id="export">Export</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// File greetings.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">sayHelloInEnglish</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"HELLO"</span>
+  <span class="p">},</span>
+       
+  <span class="na">sayHelloInSpanish</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"Hola"</span>
+  <span class="p">},</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="import">Import</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">greetings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./greetings.js"</span><span class="p">);</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="module-systeme">Module Systeme</h3>
+
+  <ul>
+    <li>In ES5 gab es diverse Module Systeme/Implementierungen
+      <ul>
+        <li>CommonJS, AMD, Bower, RequireJS</li>
+      </ul>
+    </li>
+    <li>Unterschiedlich zwischen Node.js und Browser</li>
+    <li>ES6 vereinheitlicht und vereinfacht</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JS Threading Modell</h1>
+
+  <section>
+
+  <!--
+![JS Event Loop](http://localhost:4000/assets/images/event-loop.png){: .image}
+klkljkj jhjh
+-->
+
+  <p><img src="http://localhost:4000/assets/images/event-loop.png" alt="JS Event Loop" style="width: 1200px;" class="stretch" />
+Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-loop-explained/" class="external small">JS Event Loop Explained</a>.</p>
+
+</section>
+
+<section>
+
+  <p><strong>Non-blocking</strong> IO, daher oft <em>Callbacks</em></p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nx">request</span><span class="p">(</span><span class="s1">'http://www.google.com'</span><span class="p">,</span> 
+        <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Done!'</span><span class="p">)</span>
+    </code></pre></figure>
+
+  <p><strong>Event Loop</strong> basiert <br /></p>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="k">while</span><span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">waitForMessage</span><span class="p">()){</span>
+      <span class="nx">queue</span><span class="p">.</span><span class="nx">processNextMessage</span><span class="p">();</span>
+    <span class="p">}</span>
+    </code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>Run-to-completion: Eine Funktion kann nicht unterbrochen werden</li>
+    <li>Adding messages: <code>setTimeout</code></li>
+    <li>Mehrere Threads (iframe, webworker) können nur über Message Pasing kommunizieren (<code>postMessage</code>)</li>
+    <li>Kein Locking!</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h2 id="wie-skaliert-das-auf-dem-server">Wie skaliert das auf dem Server?</h2>
+
+  <ul>
+    <li>NodeJS beinhalted ein <a href="http://nodejs.org/docs/latest/api/cluster.html" class="external">Cluster Module</a></li>
+    <li>Mehrere NodeJS Instanzen benutzen auch mehrere Prozessor Kerne (z.B. hinter einem Nginx)</li>
+    <li>Socket.io kann für Realtime Interaktionen von mehreren Client verwendet werden</li>
+    <li>Zudem gibt es Module wie <code class="highlighter-rouge">pm2</code> und <code class="highlighter-rouge">loopback</code></li>
+  </ul>
+
+</section>
+
+<section>
+
+  <p><a href="Intro to Node.JS" class="external">http://www.aaronstannard.com/intro-to-nodejs-for-net-developers/</a></p>
+
+  <blockquote>
+    <p>Node’s true innovation is its evented + asynchronous I/O model.</p>
+  </blockquote>
+
+  <aside class="notes">
+    <p>http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations</p>
+  </aside>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>http://stackoverflow.com/questions/2387724/node-js-on-multi-core-machines]</li>
+    <li>http://blog.carbonfive.com/2014/02/28/taking-advantage-of-multi-processor-environments-in-node-js/</li>
+    <li>http://stackoverflow.com/questions/14795145/how-the-single-threaded-non-blocking-io-model-works-in-node-js</li>
+    <li>https://softwareengineeringdaily.com/2015/08/02/how-does-node-js-work-asynchronously-without-multithreading/</li>
+  </ul>
+
+</section>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>REST: Anbindung an den Server</h1>
+
+  <section>
+
+  <h3 id="request">Request</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Request</span> <span class="nx">URL</span><span class="err">:</span><span class="nx">https</span><span class="err">:</span><span class="c1">//test.wroomer.com/v1/storage/filter/list</span>
+<span class="nx">Request</span> <span class="nx">Method</span><span class="err">:</span><span class="nx">GET</span>
+<span class="nx">Status</span> <span class="nx">Code</span><span class="err">:</span><span class="mi">200</span> <span class="nx">OK</span>
+<span class="nx">Remote</span> <span class="nx">Address</span><span class="err">:</span><span class="mi">91</span><span class="p">.</span><span class="nx">xxx</span><span class="p">.</span><span class="mi">149</span><span class="p">.</span><span class="nx">xxx</span><span class="err">:</span><span class="mi">443</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="response-header">Response Header</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Credentials</span><span class="err">:</span><span class="kc">true</span>
+<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Headers</span><span class="err">:</span><span class="nx">Set</span><span class="o">-</span><span class="nx">Cookie</span>
+<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Expose</span><span class="o">-</span><span class="nx">Headers</span><span class="err">:</span><span class="nx">Set</span><span class="o">-</span><span class="nx">Cookie</span>
+<span class="nx">Cache</span><span class="o">-</span><span class="nx">Control</span><span class="err">:</span><span class="nx">no</span><span class="o">-</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">no</span><span class="o">-</span><span class="nx">store</span><span class="p">,</span> <span class="nx">max</span><span class="o">-</span><span class="nx">age</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">must</span><span class="o">-</span><span class="nx">revalidate</span>
+<span class="nl">Connection</span><span class="p">:</span><span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Encoding</span><span class="err">:</span><span class="nx">gzip</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="err">:</span><span class="nx">application</span><span class="o">/</span><span class="nx">json</span><span class="p">;</span><span class="nx">charset</span><span class="o">=</span><span class="nx">UTF</span><span class="o">-</span><span class="mi">8</span>
+<span class="nl">Date</span><span class="p">:</span><span class="nx">Thu</span><span class="p">,</span> <span class="mi">15</span> <span class="nx">Dec</span> <span class="mi">2016</span> <span class="mi">13</span><span class="err">:</span><span class="mi">08</span><span class="err">:</span><span class="mi">28</span> <span class="nx">GMT</span>
+<span class="nl">Expires</span><span class="p">:</span><span class="mi">0</span>
+<span class="nl">Pragma</span><span class="p">:</span><span class="nx">no</span><span class="o">-</span><span class="nx">cache</span>
+<span class="nl">Server</span><span class="p">:</span><span class="nx">nginx</span><span class="o">/</span><span class="mf">1.6</span><span class="p">.</span><span class="mi">2</span>
+<span class="nx">Transfer</span><span class="o">-</span><span class="nx">Encoding</span><span class="err">:</span><span class="nx">chunked</span>
+<span class="nl">Vary</span><span class="p">:</span><span class="nx">Accept</span><span class="o">-</span><span class="nx">Encoding</span>
+<span class="nx">X</span><span class="o">-</span><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">-</span><span class="nx">Options</span><span class="err">:</span><span class="nx">nosniff</span>
+<span class="nx">X</span><span class="o">-</span><span class="nx">Frame</span><span class="o">-</span><span class="nx">Options</span><span class="err">:</span><span class="nx">SAMEORIGIN</span>
+<span class="nx">X</span><span class="o">-</span><span class="nx">XSS</span><span class="o">-</span><span class="nx">Protection</span><span class="err">:</span><span class="mi">1</span><span class="p">;</span> <span class="nx">mode</span><span class="o">=</span><span class="nx">block</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="response-body-json">Response Body: JSON</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span><span class="s2">"number_of_filters_found"</span><span class="err">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">"stored_filters"</span><span class="err">:</span><span class="p">[]}</span></code></pre></figure>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Alternativen zu REST</h1>
+
+  <ul>
+  <li>GraphQL</li>
+  <li>Protocoll Buffers</li>
+  <li><a href="http://bsonspec.org/" class="external">Binary JSON</a></li>
+  <li>…</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Modernes JavaScript</h1>
+
+  <ul>
+  <li>Komplettes HTML wird von JavaScript erzeugt</li>
+  <li>Keine Seiten mehr - Application wird (nur) am Anfang geladen: <br />
+<strong>Single Page Application</strong> (SPA)</li>
+  <li>Die Applikation benutzt sehr viele JS Komponenten (&gt; 100)</li>
+  <li>Komponentenmanagement und Build System auf Basis von <strong>Node.js</strong></li>
+  <li>Browserunterscheide werden durch <strong>Polyfills</strong> ausgebügelt</li>
+  <li>Serveranbingung über <strong>REST</strong> oder <strong>GraphQL</strong></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Polyfills</h1>
+
+  <p>Browserunterschiede werden mittels <em>Polyfill</em> ausgeglichen</p>
+
+<blockquote>
+  <p>A shim that mimics a future API providing fallback functionality to older browsers.</p>
+</blockquote>
+
+<p><a href="What is a Polyfill?" class="external">https://remysharp.com/2010/10/08/what-is-a-polyfill</a></p>
+
+<blockquote>
+  <p>The No-Nonsense Guide to HTML5 Fallbacks</p>
+</blockquote>
+
+<p><a href="HTML5 Cross Browser Polyfills" class="external">https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills</a></p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Lodash</h1>
+
+  <section>
+
+  <blockquote>
+    <p>Reduce LOC and improve clarity of your application logic with Lodash</p>
+  </blockquote>
+
+  <p><a href="Lodash" class="external">http://colintoh.com/blog/lodash-10-javascript-utility-functions-stop-rewriting</a></p>
+
+  <p><a href="https://lodash.com/docs/4.17.2" class="external">https://lodash.com/docs/4.17.2</a></p>
+
+</section>
+
+<section>
+
+  <h3 id="loop-through-a-nested-collection">Loop through a nested collection</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">ownerArr</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"Colin"</span><span class="p">,</span>
+    <span class="s2">"pets"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"dog1"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dog2"</span><span class="p">}],</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="s2">"pets"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"dog3"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dog4"</span><span class="p">}],</span>
+<span class="p">}];</span>
+
+<span class="c1">// Array's map method.</span>
+<span class="nx">ownerArr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">owner</span><span class="p">){</span>
+   <span class="k">return</span> <span class="nx">owner</span><span class="p">.</span><span class="nx">pets</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span>
+<span class="p">})</span>
+
+<span class="c1">// Lodash</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">ownerArr</span><span class="p">,</span> <span class="s1">'pets[0].name'</span><span class="p">);</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="deep-cloning-javascript-object">Deep-cloning Javascript object</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">objA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"colin"</span>
+<span class="p">}</span>
+
+<span class="c1">// Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript</span>
+
+<span class="c1">// Lodash</span>
+<span class="kd">let</span> <span class="nx">objB</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">objA</span><span class="p">);</span>
+<span class="nx">objB</span> <span class="o">===</span> <span class="nx">objA</span> <span class="c1">// false</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="extending-object">Extending object</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">objA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"colin"</span><span class="p">,</span> <span class="s2">"car"</span><span class="p">:</span> <span class="s2">"suzuki"</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">objB</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"james"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">17</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">objC</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"pet"</span><span class="p">:</span> <span class="s2">"dog"</span><span class="p">}</span>
+
+<span class="c1">// Lodash</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">objA</span><span class="p">,</span> <span class="nx">objB</span><span class="p">,</span> <span class="nx">objC</span><span class="p">)</span>
+<span class="c1">// {"name": "james", "car": "suzuki", "age": 17, "pet": "dog"}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="removing-properties-from-object">Removing properties from object</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Naive method: Remove an array of keys from object</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">){</span>
+        <span class="k">delete</span><span class="p">(</span><span class="nx">that</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">objA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"colin"</span><span class="p">,</span> <span class="s2">"car"</span><span class="p">:</span> <span class="s2">"suzuki"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">17</span><span class="p">}</span>
+<span class="nx">objA</span><span class="p">.</span><span class="nx">remove</span><span class="p">([</span><span class="s1">'car'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span>
+<span class="nx">objA</span><span class="p">;</span> <span class="c1">// {"name": "colin"}</span>
+
+<span class="c1">// Lodash</span>
+<span class="nx">objA</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">objA</span><span class="p">,</span> <span class="p">[</span><span class="s1">'car'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span> <span class="c1">// {"name": "colin"}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="cont">Cont…</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">objA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"colin"</span><span class="p">,</span> <span class="s2">"car"</span><span class="p">:</span> <span class="s2">"suzuki"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">17</span><span class="p">}</span>
+
+<span class="c1">// Lodash</span>
+<span class="nx">objA</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">objA</span><span class="p">,</span> <span class="s1">'car'</span><span class="p">)</span> <span class="c1">// {"name": "colin", "age": 17}</span>
+<span class="nx">objA</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">objA</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">)</span> <span class="c1">// {"name": "colin"}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>http://stackoverflow.com/questions/21536627/whats-the-difference-between-transform-and-reduce-in-lodash</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Fetch</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">myImage</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'img'</span><span class="p">)</span>
+
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'flowers.jpg'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">blob</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">myBlob</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">objectURL</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">myBlob</span><span class="p">)</span>
+  <span class="nx">myImage</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">objectURL</span>
+<span class="p">})</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li><code class="highlighter-rouge">Promise</code>s sind eine Alternative zur Callback Hölle</li>
+    <li>Mehr im 2. Teil des Vortrages</li>
+  </ul>
+
+</section>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>ES6</h1>
+
+  <section>
+
+  <ul>
+    <li>ES6 (aka ECMAScript 2016) ist die neuste Sprachdefinition</li>
+    <li>Browserhersteller arbeiten an <a href="http://kangax.github.io/compat-table/es6/" class="external">Unterstützung</a></li>
+    <li>ES6 ist weit verbreitet und hat ES5 fast vollständig verdrängt</li>
+    <li>Möglich durch Verwendung von <em>Transpilern</em>:<br />
+Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://github.com/lukehoban/es6features</li>
+    <li>http://es6-features.org/</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>let const destructing</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// let and const</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span>
+    <span class="p">{</span>
+      <span class="c1">// okay, block scoped name</span>
+      <span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"sneaky"</span>
+      <span class="c1">// error, const</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="s2">"foo"</span>
+    <span class="p">}</span>
+    <span class="c1">// error, already declared in block</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"inner"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// DESTRUCTION</span>
+
+<span class="c1">// list matching</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c1">// object matching</span>
+<span class="kd">let</span> <span class="p">{</span> <span class="na">op</span><span class="p">:</span> <span class="nx">a</span><span class="p">,</span> <span class="na">lhs</span><span class="p">:</span> <span class="p">{</span> <span class="na">op</span><span class="p">:</span> <span class="nx">b</span> <span class="p">},</span> <span class="na">rhs</span><span class="p">:</span> <span class="nx">c</span> <span class="p">}</span>
+       <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// object matching shorthand</span>
+<span class="c1">// binds `op`, `lhs` and `rhs` in scope</span>
+<span class="kd">let</span> <span class="p">{</span><span class="nx">op</span><span class="p">,</span> <span class="nx">lhs</span><span class="p">,</span> <span class="nx">rhs</span><span class="p">}</span> <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// Can be used in parameter position</span>
+<span class="kd">function</span> <span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="nx">x</span><span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+
+<span class="c1">// Fail-soft destructuring</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="kc">undefined</span>
+
+<span class="c1">// Fail-soft destructuring with defaults</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="mi">1</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>default rest spread template</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Default parameters</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// y is 12 if not passed (or passed as undefined)</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span>
+<span class="p">}</span>
+<span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
+
+<span class="c1">// Rest arguments</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="p">...</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// y is an Array</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">y</span><span class="p">.</span><span class="nx">length</span>
+<span class="p">}</span>
+<span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+
+<span class="c1">// Spread operator</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">z</span>
+<span class="p">}</span>
+<span class="c1">// Pass each elem of array as argument</span>
+<span class="nx">f</span><span class="p">(...[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span>
+
+<span class="c1">// String interpolation</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="nx">time</span> <span class="o">=</span> <span class="s2">"today"</span>
+<span class="err">`</span><span class="nx">Hello</span> <span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">},</span> <span class="nx">how</span> <span class="nx">are</span> <span class="nx">you</span> <span class="nx">$</span><span class="p">{</span><span class="nx">time</span><span class="p">}?</span><span class="err">`</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Arrows vs. Functions</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Expression bodies</span>
+<span class="kd">let</span> <span class="nx">odds</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">nums</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="nx">i</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">pairs</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="p">({</span><span class="na">even</span><span class="p">:</span> <span class="nx">v</span><span class="p">,</span> <span class="na">odd</span><span class="p">:</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}))</span>
+
+<span class="c1">// Statement bodies</span>
+<span class="nx">nums</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">v</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nx">fives</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// Lexical this</span>
+<span class="kd">let</span> <span class="nx">bob</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">_name</span><span class="p">:</span> <span class="s2">"Bob"</span><span class="p">,</span>
+  <span class="na">_friends</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="nx">printFriends</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_friends</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">f</span> <span class="o">=&gt;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_name</span> <span class="o">+</span> <span class="s2">" knows "</span> <span class="o">+</span> <span class="nx">f</span><span class="p">))</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="this-and-function"><code class="highlighter-rouge">this</code> and <code class="highlighter-rouge">function</code></h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">growOld</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="o">++</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">growOld</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span> <span class="p">},</span><span class="mi">2000</span><span class="p">)</span>
+<span class="c1">// 1, should have been 2</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="this-and-function-1"><code class="highlighter-rouge">this</code> and <code class="highlighter-rouge">function</code></h3>
+
+  <ul>
+    <li>Problem: <code class="highlighter-rouge">setTimeout(person.growOld,1000)</code> führt <code class="highlighter-rouge">growOld</code> im <em>Kontext</em> von <code class="highlighter-rouge">window</code> aus</li>
+    <li>Vorher: <code class="highlighter-rouge">windows.age === undefined</code></li>
+    <li>Nachher: <code class="highlighter-rouge">windows.age === NaN</code> (wegen <code class="highlighter-rouge">undefined + 1</code>)</li>
+    <li>Besser <code class="highlighter-rouge">growOld</code> als Arrow Funktion</li>
+    <li>Arrow Funktion bindet an das äußere <code class="highlighter-rouge">this</code> (kein späterer <em>Kontext</em>)</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Enhanced Objects</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// __proto__</span>
+    <span class="na">__proto__</span><span class="p">:</span> <span class="nx">theProtoObj</span><span class="p">,</span>
+    <span class="c1">// Shorthand for ‘handler: handler’</span>
+    <span class="nx">handler</span><span class="p">,</span>
+    <span class="c1">// Methods</span>
+    <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+     <span class="c1">// Super calls</span>
+     <span class="k">return</span> <span class="s2">"d "</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="c1">// Computed (dynamic) property names</span>
+    <span class="p">[</span> <span class="s1">'prop_'</span> <span class="o">+</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">)()</span> <span class="p">]:</span> <span class="mi">42</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Set & Map</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Sets</span>
+<span class="kd">let</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">()</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">"goodbye"</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="mi">2</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span> <span class="o">===</span> <span class="kc">true</span>
+
+<span class="c1">// Maps</span>
+<span class="kd">let</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">()</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">34</span><span class="p">)</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">34</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Iteratoren</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">pre</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">];</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">cur</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">n</span> <span class="nx">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// truncate the sequence at 1000</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Generatoren</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]:</span> <span class="kd">function</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">pre</span>
+      <span class="nx">pre</span> <span class="o">=</span> <span class="nx">cur</span>
+      <span class="nx">cur</span> <span class="o">+=</span> <span class="nx">temp</span>
+      <span class="k">yield</span> <span class="nx">cur</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">n</span> <span class="nx">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// truncate the sequence at 1000</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">break</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="p">}</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Symbole</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">let</span> <span class="nx">MyClass</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// module scoped symbol</span>
+  <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"key"</span><span class="p">)</span>
+
+  <span class="kd">function</span> <span class="nx">MyClass</span><span class="p">(</span><span class="nx">privateData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">privateData</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">MyClass</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">doStuff</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="p">...</span> <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">MyClass</span>
+<span class="p">})()</span>
+
+<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span>
+<span class="c1">// Keine Sichtbarkeit des Properties von außen</span>
+<span class="nx">c</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Proxies</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Proxying a normal object</span>
+<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">get</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="err">`</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="o">!</span><span class="err">`</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="s1">'Hello, world!'</span>
+
+<span class="c1">// Proxying a function object</span>
+<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">apply</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'I am the proxy'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span>
+<span class="nx">p</span><span class="p">()</span> <span class="o">===</span> <span class="s1">'I am the proxy'</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Klassen</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">class</span> <span class="nx">SkinnedMesh</span> <span class="kr">extends</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span>
+    
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">.</span><span class="nx">defaultMatrix</span><span class="p">()</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bones</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">boneMatrices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+  <span class="nx">update</span><span class="p">(</span><span class="nx">camera</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="kr">super</span><span class="p">.</span><span class="nx">update</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="nx">get</span> <span class="nx">boneCount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">set</span> <span class="nx">matrixType</span><span class="p">(</span><span class="nx">matrixType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">[</span><span class="nx">matrixType</span><span class="p">]()</span>
+  <span class="p">}</span>
+  <span class="kr">static</span> <span class="nx">defaultMatrix</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Matrix4</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>ES6 Klassen sind nur ‚Syntactic Sugar‘</li>
+    <li>ES6 ist (weiterhin) prototype-basiert</li>
+    <li>Wichtigste Konsequenz: <code class="highlighter-rouge">this</code> ist praktisch immer notwendig<br />
+z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code></li>
+    <li>‚Statics‘ werden in der ‚constructor function‘ definiert</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Subclassing Builtins</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Pseudo-code of Array</span>
+<span class="kr">class</span> <span class="nb">Array</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <span class="kr">static</span> <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">create</span><span class="p">]()</span> <span class="p">{</span>
+        <span class="c1">// Install special [[DefineOwnProperty]]</span>
+        <span class="c1">// to magically update 'length'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// User code of Array subclass</span>
+<span class="kr">class</span> <span class="nx">MyArray</span> <span class="kr">extends</span> <span class="nb">Array</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Two-phase 'new':</span>
+<span class="c1">// 1) Call @@create to allocate object</span>
+<span class="c1">// 2) Invoke constructor on new instance</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">();</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span></code></pre></figure>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Module</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Defining a module</span>
+<span class="c1">// lib/math.js</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="kd">let</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.141593</span>
+
+<span class="c1">// Using a module</span>
+<span class="c1">// app.js</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">math</span> <span class="nx">from</span> <span class="s2">"lib/math"</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">math</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">))</span>
+
+<span class="c1">// Another way to use the module</span>
+<span class="c1">// otherApp.js</span>
+<span class="kr">import</span> <span class="p">{</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">pi</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"lib/math"</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">pi</span><span class="p">))</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="default-module">Default Module</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// lib/mathplusplus.js</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="nx">from</span> <span class="s2">"lib/math"</span>
+<span class="kr">export</span> <span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.71828182846</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// app.js</span>
+<span class="kr">import</span> <span class="nx">ln</span><span class="p">,</span> <span class="p">{</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">e</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"lib/mathplusplus"</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">ln</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="o">*</span><span class="nx">pi</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>3 Arten des Module Imports: *, default und benamt</li>
+    <li>ES6 beinhaltet ein Module System</li>
+    <li>Keine Unterschiede mehr zwischen Node.js und Browser!</li>
+  </ul>
+
+</section>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JavaScript Feature nach ES6</h1>
+
+  <ul>
+  <li>ES7 (aka ES2016)</li>
+  <li>Decorators</li>
+  <li>Bind operator (<code class="highlighter-rouge">::</code>)</li>
+  <li>Module loaders</li>
+  <li>Fetch</li>
+  <li>async/await</li>
+</ul>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  
+
+  <h1 id="typescripthttpswwwtypescriptlangorg"><a href="https://www.typescriptlang.org">TypeScript</a></h1>
+
+<ul>
+  <li>Idee: <em>Compile</em>-time Type Checking</li>
+  <li>ES6 ist echte Untermenge von TS</li>
+  <li>Schrittweise Migration durch <code class="highlighter-rouge">any</code></li>
+  <li><strong>Keine Runtime Checks</strong></li>
+  <li>Kein Runtime Overhead</li>
+  <li>Alternative: <a href="https://flowtype.org/" class="external">flow</a></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Basic Types</h1>
+
+  <section>
+
+  <h3 id="basics">Basics</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">isDone</span><span class="err">:</span> <span class="kr">boolean</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="kd">let</span> <span class="nx">decimal</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="kd">let</span> <span class="nx">hex</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mh">0xf00d</span>
+<span class="kd">let</span> <span class="nx">binary</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">b1010</span>
+<span class="kd">let</span> <span class="nx">octal</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="mi">0</span><span class="nx">o744</span>
+
+<span class="kd">let</span> <span class="nx">color</span><span class="err">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="s2">"blue"</span>
+
+<span class="kd">let</span> <span class="nx">list</span><span class="err">:</span> <span class="kr">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="tuples">Tuples</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// Declare a tuple type</span>
+<span class="kd">let</span> <span class="nx">x</span><span class="err">:</span> <span class="p">[</span><span class="kr">string</span><span class="p">,</span> <span class="kr">number</span><span class="p">]</span>
+<span class="c1">// Initialize it</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"hello"</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="c1">// OK</span>
+<span class="c1">// Initialize it incorrectly</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">]</span> <span class="c1">// Error</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1">// OK</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> 
+<span class="c1">// Error, 'number' does not have 'substr'</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="any-und-object">Any und Object</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">notSure</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">notSure</span> <span class="o">=</span> <span class="s2">"maybe a string instead"</span>
+<span class="nx">notSure</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">// okay, definitely a boolean</span>
+
+<span class="kd">let</span> <span class="nx">notSure</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">notSure</span><span class="p">.</span><span class="nx">ifItExists</span><span class="p">()</span> <span class="c1">// okay, ifItExists might exist at runtime</span>
+<span class="nx">notSure</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">()</span> 
+<span class="c1">// okay, toFixed exists (but the compiler doesn't check)</span>
+
+<span class="kd">let</span> <span class="nx">prettySure</span><span class="err">:</span> <span class="nb">Object</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nx">prettySure</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">()</span> 
+<span class="c1">// Error: Property 'toFixed' doesn't exist on type 'Object'.</span>
+
+<span class="kd">let</span> <span class="nx">list</span><span class="err">:</span> <span class="kr">any</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s2">"free"</span><span class="p">]</span>
+
+<span class="nx">list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="void-null-undefined-and-never">Void, Null, Undefined, and Never</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">warnUser</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="na">unusable</span><span class="p">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
+
+<span class="c1">// Not much else we can assign to these variables!</span>
+<span class="kd">let</span> <span class="na">u</span><span class="p">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="na">n</span><span class="p">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+
+<span class="c1">// Function returning never must have unreachable end point</span>
+<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="na">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Inferred return type is never</span>
+<span class="kd">function</span> <span class="nx">fail</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">error</span><span class="p">(</span><span class="s2">"Something failed"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Function returning never must have unreachable end point</span>
+<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">():</span> <span class="nx">never</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-assertions-casts">Type assertions (Casts)</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">someValue</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="s2">"this is a string"</span>
+
+<span class="kd">let</span> <span class="nx">strLength</span><span class="err">:</span> <span class="kr">number</span> <span class="o">=</span> <span class="p">(</span><span class="nx">someValue</span> <span class="k">as</span> <span class="kr">string</span><span class="p">).</span><span class="nx">length</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="interfaces">Interfaces</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">SquareConfig</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="kr">string</span> <span class="c1">// required property</span>
+    <span class="nx">width</span><span class="p">?:</span> <span class="kr">number</span>  <span class="c1">// optional property</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">createSquare</span><span class="p">(</span><span class="nx">config</span><span class="err">:</span> <span class="nx">SquareConfig</span><span class="p">)</span><span class="err">:</span> <span class="p">{</span><span class="nl">color</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">area</span><span class="p">:</span> <span class="kr">number</span><span class="p">}</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">newSquare</span> <span class="o">=</span> <span class="p">{</span><span class="na">color</span><span class="p">:</span> <span class="s2">"white"</span><span class="p">,</span> <span class="na">area</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newSquare</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">color</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">newSquare</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">config</span><span class="p">.</span><span class="nx">width</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">newSquare</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">mySquare</span> <span class="o">=</span> <span class="nx">createSquare</span><span class="p">({</span><span class="na">color</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">})</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="generics">Generics</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arg</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">);</span>  <span class="c1">// type of output will be 'string'</span>
+
+<span class="kr">interface</span> <span class="nx">Lengthwise</span> <span class="p">{</span>
+    <span class="nl">length</span><span class="p">:</span> <span class="kr">number</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">loggingIdentity</span><span class="o">&lt;</span><span class="nx">T</span> <span class="k">extends</span> <span class="nx">Lengthwise</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+    <span class="c1">// Now we know it has a .length property, so no more error</span>
+    <span class="k">return</span> <span class="nx">arg</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://github.com/Microsoft/TypeScript/wiki/What‘s-new-in-TypeScript</li>
+    <li>https://www.typescriptlang.org/docs/handbook/basic-types.html</li>
+    <li>https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html</li>
+    <li>https://www.typescriptlang.org/docs/handbook/symbols.html</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Advanced Types</h1>
+
+  <section>
+
+  <h3 id="intersection-types">Intersection Types</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">extend</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">first</span><span class="err">:</span> <span class="nx">T</span><span class="p">,</span> <span class="nx">second</span><span class="err">:</span> <span class="nx">U</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">U</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">T</span> <span class="o">&amp;</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">first</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(</span><span class="nx">result</span> <span class="k">as</span> <span class="kr">any</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="nx">first</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">second</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="p">(</span><span class="nx">result</span> <span class="k">as</span> <span class="kr">any</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span><span class="nx">second</span><span class="p">)[</span><span class="nx">id</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">name</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Loggable</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span>
+<span class="p">}</span>
+<span class="kr">class</span> <span class="nx">ConsoleLogger</span> <span class="k">implements</span> <span class="nx">Loggable</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">jim</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">"Jim"</span><span class="p">),</span> <span class="k">new</span> <span class="nx">ConsoleLogger</span><span class="p">())</span>
+<span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">jim</span><span class="p">.</span><span class="nx">name</span>
+<span class="nx">jim</span><span class="p">.</span><span class="nx">log</span><span class="p">()</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="union-types">Union Types</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">padLeft</span><span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">padding</span><span class="err">:</span> <span class="kr">string</span> <span class="o">|</span> <span class="kr">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">padding</span> <span class="o">===</span> <span class="s2">"number"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">padding</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span> <span class="o">+</span> <span class="nx">value</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">padding</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">padding</span> <span class="o">+</span> <span class="nx">value</span>
+    <span class="p">}</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="err">`</span><span class="nx">Expected</span> <span class="kr">string</span> <span class="nx">or</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">got</span> <span class="s1">'${padding}'</span><span class="p">.</span><span class="err">`</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">padLeft</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> 
+<span class="c1">// returns "    Hello world"</span>
+<span class="kd">let</span> <span class="nx">indentedString</span> <span class="o">=</span> <span class="nx">padLeft</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> 
+<span class="c1">// errors during compilation</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-guards">Type guards</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">isFish</span><span class="p">(</span><span class="nx">pet</span><span class="err">:</span> <span class="nx">Fish</span> <span class="o">|</span> <span class="nx">Bird</span><span class="p">)</span><span class="err">:</span> <span class="nx">pet</span> <span class="k">is</span> <span class="nx">Fish</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">pet</span> <span class="k">as</span> <span class="nx">Fish</span><span class="p">).</span><span class="nx">swim</span> <span class="o">!==</span> <span class="kc">undefined</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="type-aliases">Type Aliases</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">type</span> <span class="nx">Name</span> <span class="o">=</span> <span class="kr">string</span>
+<span class="kd">type</span> <span class="nx">NameResolver</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">string</span>
+<span class="kd">type</span> <span class="nx">NameOrResolver</span> <span class="o">=</span> <span class="nx">Name</span> <span class="o">|</span> <span class="nx">NameResolver</span>
+<span class="kd">function</span> <span class="nx">getName</span><span class="p">(</span><span class="nx">n</span><span class="err">:</span> <span class="nx">NameOrResolver</span><span class="p">)</span><span class="err">:</span> <span class="nx">Name</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">n</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">n</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://www.typescriptlang.org/docs/handbook/advanced-types.html</li>
+    <li>https://www.typescriptlang.org/docs/handbook/modules.html</li>
+    <li>
+      <p>https://basarat.gitbooks.io/typescript/content/docs/async-await.html</p>
+    </li>
+    <li>https://github.com/Microsoft/TypeScript/issues/3203</li>
+    <li>http://blog.wolksoftware.com/working-with-react-and-typescript</li>
+    <li>https://www.typescriptlang.org/docs/handbook/react-&amp;-webpack.html</li>
+    <li>https://github.com/Microsoft/TypeScript/issues/5478</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Declaration Merging</h1>
+
+  <section>
+
+  <h3 id="interfaces-mit-selben-namen">2 Interfaces mit selben Namen…</h3>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
+    <span class="nx">doIt</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">();</span>
+    <span class="nx">doSomethingDifferent</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="werden-zu">…werden zu</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
+    <span class="nx">doSomething</span><span class="p">();</span>
+    <span class="nx">doSomethingDifferent</span><span class="p">();</span>
+    <span class="nx">doIt</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <h3 id="merge-bar">Merge-bar</h3>
+
+  <ul>
+    <li>Vieles kann gemerged werden</li>
+    <li>Module mit Klassen</li>
+    <li>Funktionen und Enums</li>
+    <li>…</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h3 id="nicht-merge-bar">Nicht Merge-bar</h3>
+
+  <ul>
+    <li>Mehrere Klassen</li>
+    <li>Klassen und Variablen</li>
+    <li>Klassen und Interfaces</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://www.typescriptlang.org/docs/handbook/declaration-merging.html</li>
+    <li>https://blog.oio.de/2014/03/21/declaration-merging-typescript/</li>
+  </ul>
+
+</section>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Definitions Files</h1>
+
+  <section>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">foo</span><span class="err">:</span> <span class="kr">number</span>
+<span class="kr">declare</span> <span class="kd">function</span> <span class="nx">greet</span><span class="p">(</span><span class="nx">greeting</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="k">void</span>
+
+<span class="kr">declare</span> <span class="k">namespace</span> <span class="nx">myLib</span> <span class="p">{</span>
+    <span class="kd">function</span> <span class="nx">makeGreeting</span><span class="p">(</span><span class="nx">s</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="kr">string</span>
+    <span class="kd">let</span> <span class="nx">numberOfGreetings</span><span class="err">:</span> <span class="kr">number</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>Type Definition File sind <strong>notwendig</strong> um aus TypeScript normales JavaScript zu benutzen</li>
+    <li>Enthalten Deklarationen</li>
+    <li><code class="highlighter-rouge">declare</code> kann in *.d.ts Dateien weg gelassen werden (d.h. ist implizit)</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h3 id="direktes-verwendung-von-js-aus-ts">Direktes Verwendung von JS aus TS</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="k">import</span> <span class="nx">MyImgJs</span> <span class="k">from</span> <span class="s1">'../../Common/MyImg.js'</span>
+
+<span class="kd">const</span> <span class="nx">MyImg</span><span class="err">:</span> <span class="k">new</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="kr">any</span> <span class="o">=</span> <span class="nx">MyImgJs</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+  <ul>
+    <li>https://typescript.codeplex.com/wikipage?title=Writing%20Definition%20%28.d.ts%29%20Files</li>
+    <li>http://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html</li>
+  </ul>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>JS Entwicklungsumgebung</h1>
+
+  <h3 id="was-brauche-ich">Was brauche ich?</h3>
+
+<ul>
+  <li>Browser (=Chrome)
+    <ul>
+      <li>Evt. Browser Addons</li>
+    </ul>
+  </li>
+  <li>Editor</li>
+  <li>Build System
+    <ul>
+      <li>Transpiler</li>
+      <li>Dev Mode Server</li>
+      <li>Packer</li>
+    </ul>
+  </li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Editor/IDE</h1>
+
+  <ul>
+  <li>Ein IDE ist <em>nicht</em> unbedingt erforderlich</li>
+  <li>Debugging geschieht meist in der Browser Umgebung</li>
+  <li><del>Eclipse</del> ist <em>ungeeignet</em></li>
+  <li>Idea</li>
+  <li>Visual Studio Code</li>
+  <li>Atom</li>
+  <li>Brackets</li>
+  <li>netbeans</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Build System</h1>
+
+  <ul>
+  <li><code class="highlighter-rouge">grunt</code>, <code class="highlighter-rouge">gulp</code>: Low Level (~<code class="highlighter-rouge">ant</code>)
+    <ul>
+      <li>Idee: Script Support für Task, die bei Build anfallen</li>
+    </ul>
+  </li>
+  <li>webpack: High Level
+    <ul>
+      <li>Idee: Packe <em>alles</em> ins JS File mittels Loadern</li>
+    </ul>
+  </li>
+  <li>Größere Projekte verwenden meist beides</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Dev Mode</h1>
+
+  <ul>
+  <li>Wegen des Transpilers braucht man Setup für Debugging</li>
+  <li>Dev Mode arbeitet als Server aus dem RAM</li>
+  <li>Support für Hot-Deployment mittels Web Socket</li>
+  <li>z.B. webpack-dev-server</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Transpiler</h1>
+
+  <ul>
+  <li>Es gibt mehrere Transpiler…</li>
+  <li>… mit unterschidelichen Stärken und Schwächen</li>
+  <li>Brauchen meist einen ES6 Polyfill (core-js) für die Generierung von ES5</li>
+  <li>Bekannte Transpiler: <br />
+Traceur, Babel, Typescript</li>
+  <li>ES5 Generierung von Typescript ist unvollständig!</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Packer</h1>
+
+  <ul>
+  <li>Packer strukturieren die Dateien fürs Deployment</li>
+  <li>JavaScript wird meist gepackt</li>
+  <li>Map Dateien für JS und CSS</li>
+  <li>Bilder werden in eine Datei zusammengefasst (Icon Fonts)</li>
+  <li>Ergebnis sind wenige große Dateien</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Linter</h1>
+
+  <ul>
+  <li>Lint für einheitlichen Source Code Style</li>
+  <li>Wichtig aber auch um Fehler zu finden (~<code class="highlighter-rouge">'use strict';</code>)</li>
+  <li>Möglich, ‚schlechte‘ JS Konstrukte zu verbieten</li>
+  <li>Editoren haben Unterstützung für Linter</li>
+  <li>Wichtige Linter: <code class="highlighter-rouge">eslint</code> und <code class="highlighter-rouge">tslint</code></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  
+
+  <h1 id="revealjshttplabhakimsereveal-js-external"><a href="http://lab.hakim.se/reveal-js/" class="external">Reveal.js</a></h1>
+
+<h2 id="html-presentations-made-easy">HTML Presentations Made Easy</h2>
+
+<h4 id="created-by-hakim-el-hattabhttphakimse-external--hakimelhttptwittercomhakimel-twitter">Created by <a href="http://hakim.se" class="external">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel" class="twitter">@hakimel</a></h4>
+
+<p>Remixed by <a href="http://tasmo.rocks/" class="external">Thomas Friese</a> / <a href="http://twitter.com/_Tasmo" class="twitter">@_Tasmo</a></p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Heads Up</h1>
+
+  <p>reveal.js is a framework for easily creating beautiful presentations using HTML. You‘ll need a browser with support for CSS 3D transforms to see it in its full glory.</p>
+
+<p>reveal-jekyll turns Markdown files to slides with the power of Jekyll.</p>
+
+<aside class="notes">
+  <p>Oh hey, these are some notes. They‘ll be hidden in your presentation, but you can see them if you open the speaker notes window (hit ‚s‘ on your keyboard).</p>
+</aside>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  
+
+  <section>
+
+  <h2 id="vertical-slides">Vertical Slides</h2>
+
+  <p>Slides can be nested inside of other slides,<br />
+try pressing <a href="#" class="navigate-down">down</a>.</p>
+
+  <p><a href="#" class="image navigate-down"><img src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow" /></a></p>
+
+</section>
+<section>
+
+  <h2 id="basement-level-1">Basement Level 1</h2>
+
+  <p>Press down or up to navigate.</p>
+
+</section>
+<section>
+
+  <h2 id="basement-level-2">Basement Level 2</h2>
+
+  <p>Cornify</p>
+
+  <p><a href="http://cornify.com" class="test external"><img src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn" /></a></p>
+
+</section>
+<section>
+
+  <h2 id="basement-level-3">Basement Level 3</h2>
+
+  <p>That‘s it, time to go back up.</p>
+
+  <p><a href="#/2"><img src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg);-webkit-transform: rotate(180deg);" /></a></p>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>slides</h1>
+
+  <p>Not a coder? No problem. There‘s a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" class="external">http://slid.es</a>.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Point of View</h1>
+
+  <p>Press <code class="highlighter-rouge">ESC</code> to enter the slide overview.</p>
+
+<p>Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js" class="external">zoom.js</a>. <code class="highlighter-rouge">Alt</code> + <code class="highlighter-rouge">click</code> anywhere to zoom back out.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Works in Modern Mobile Browsers</h1>
+
+  <p>Try it out! You can swipe through the slides and pinch your way to the overview.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Marvelous Unordered List</h1>
+
+  <ul>
+  <li>No order here</li>
+  <li>Or here</li>
+  <li>Or here</li>
+  <li>Or here</li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Fantastic Ordered List</h1>
+
+  <ol>
+  <li>One is smaller than…</li>
+  <li>Two is smaller than…</li>
+  <li>Three!</li>
+</ol>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Markdown support</h1>
+
+  <p>Every Markdown file in <code class="highlighter-rouge">_posts</code> becomes a single slide in „reveal-jekyll“.</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="s">layout</span><span class="pi">:</span> <span class="s">slide</span>
+<span class="s">title</span><span class="pi">:</span> <span class="s">Markdown support</span>
+<span class="nn">---</span>
+ 
+Every Markdown file in <span class="sb">`_posts`</span> becomes a single slide in "reveal-jekyll".</code></pre></figure>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Transition Styles</h1>
+
+  <p>You can select from different transitions, like:</p>
+
+<h3 id="cubetransitioncube9---pagetransitionpage9---concavetransitionconcave9---zoomtransitionzoom9---lineartransitionlinear9---fadetransitionfade9---nonetransitionnone9---defaulttransitiondefault9"><a href="?transition=cube#/9">Cube</a> - <a href="?transition=page#/9">Page</a> - <a href="?transition=concave#/9">Concave</a> - <a href="?transition=zoom#/9">Zoom</a> - <a href="?transition=linear#/9">Linear</a> - <a href="?transition=fade#/9">Fade</a> - <a href="?transition=none#/9">None</a> - <a href="?transition=default#/9">Default</a></h3>
+
+<p>May may change this in the <code class="highlighter-rouge">_config.yml</code> configuration file.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Themes</h1>
+
+  <p><a href="https://github.com/tasmo/reveal-jekyll" class="external">„reveal-jekyll“</a> is based on <a href="http://ethanschoonover.com/solarized" class="external">Solarized colors by Ethan Schoonover</a> containing</p>
+
+<h3 id="a-light10-button-lighter-and-a-dark10-button-darker-theme">a <a href="#/10" class="button lighter"><code class="highlighter-rouge">light</code></a> and a <a href="#/10" class="button darker"><code class="highlighter-rouge">dark</code></a> theme.</h3>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Global State</h1>
+
+  <p>Set <code class="highlighter-rouge">data-state="something"</code> on a slide and <code class="highlighter-rouge">"something"</code>
+will be added as a class to the document element when the slide is open. This lets you
+apply broader style changes, like switching the background.</p>
+
+<p>In „reveal-jekyll“ you can do this by setting it in the Front-matter of the slide like this:</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="s">data</span><span class="pi">:</span>
+  <span class="s">state</span><span class="pi">:</span> <span class="s">something</span>
+<span class="nn">---</span></code></pre></figure>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide"  data-state="customevent">
+  <h1>Custom Events</h1>
+
+  <p>Additionally custom events can be triggered on a per slide basis by binding to the <code class="highlighter-rouge">data-state</code> name.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Reveal</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span> <span class="s1">'customevent'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">'"customevent" has fired'</span> <span class="p">);</span>
+<span class="p">}</span> <span class="p">);</span></code></pre></figure>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  
+
+  <section data-background="#cb4b16">
+
+  <h2 id="slide-backgrounds">Slide Backgrounds</h2>
+
+  <p>Set <code class="highlighter-rouge">data-background="#cb4b16"</code> on a slide to change the full page background to the given color. All CSS color formats are supported.</p>
+
+  <figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="s">data</span><span class="pi">:</span>
+  <span class="s">background</span><span class="pi">:</span> <span class="s1">'</span><span class="s">#cb4b16'</span>
+<span class="nn">---</span></code></pre></figure>
+
+  <p><a href="#" class="image navigate-down"><img src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow" /></a></p>
+
+</section>
+<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
+
+  <h2 id="image-backgrounds">Image Backgrounds</h2>
+
+  <figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="s">data</span><span class="pi">:</span>
+  <span class="s">background</span><span class="pi">:</span> <span class="s">image.png</span>
+<span class="nn">---</span></code></pre></figure>
+
+</section>
+<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" data-background-repeat="repeat" data-background-size="100px">
+
+  <h2 id="repeated-image-backgrounds">Repeated Image Backgrounds</h2>
+
+  <figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="s">data</span><span class="pi">:</span>
+  <span class="s">background</span><span class="pi">:</span> <span class="s">image.png</span>
+  <span class="s">background-repeat</span><span class="pi">:</span> <span class="s">repeat</span>
+  <span class="s">background-size</span><span class="pi">:</span> <span class="s">100px</span>
+<span class="nn">---</span></code></pre></figure>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide"  data-transition="zoom" data-background="#d33682" data-background-transition="slide">
+  <h1>Background Transitions</h1>
+
+  <p>Pass reveal.js the <code class="highlighter-rouge">backgroundTransition: 'zoom'</code> config argument to make backgrounds zoom rather than slide.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide"  data-transition="linear" data-background="#dc322f" data-background-transition="zoom">
+  <h1>Background Transition Override</h1>
+
+  <p>You can override background transitions per slide by using<br />
+<code class="highlighter-rouge">data:  background-transition: zoom</code>.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Clever Quotes</h1>
+
+  <p>These guys come in two forms, inline: <em>„The nice thing about standards is that there are so many to choose from“</em> and block:</p>
+
+<blockquote>
+  <p>For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.</p>
+</blockquote>
+
+<aside class="notes">
+  <p>http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations</p>
+
+</aside>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Pretty Code</h1>
+
+  
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">linkify</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span> <span class="nx">supports3DTransforms</span> <span class="p">)</span> <span class="p">{</span>
+ 
+    <span class="kd">var</span> <span class="nx">nodes</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">);</span>
+ 
+    <span class="k">for</span><span class="p">(</span> <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">nodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+ 
+      <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nx">node</span><span class="p">.</span><span class="nx">className</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">node</span><span class="p">.</span><span class="nx">className</span> <span class="o">+=</span> <span class="s1">' roll'</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Courtesy of <a href="https://github.com/jneen/rouge" class="external">Rouge</a>.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Intergalactic Interconnections</h1>
+
+  <p>You can link between slides internally,<br />
+<a href="#/2/3">like this</a>.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  
+
+  <section id="fragments">
+
+<h2>Fragmented Views</h2>
+
+<p data-fragment-index="1" class="fragment">... to step through ...</p>
+<ol>
+  <li data-fragment-index="2" class="fragment"><code>any type</code></li>
+  <li data-fragment-index="3" class="fragment"><em>of view</em></li>
+  <li data-fragment-index="4" class="fragment"><strong>fragments</strong></li>
+</ol>
+
+<aside class="notes">
+  This slide has fragments which are also stepped through in the notes window.
+</aside>
+
+</section>
+
+<section>
+
+<h2>Fragment Styles</h2>
+<p>There's a few styles of fragments, like:</p>
+<p data-fragment-index="5" class="fragment grow">grow</p>
+<p data-fragment-index="6" class="fragment shrink">shrink</p>
+<p data-fragment-index="7" class="fragment roll-in">roll-in</p>
+<p data-fragment-index="8" class="fragment fade-out">fade-out</p>
+<p data-fragment-index="9" class="fragment highlight-red">highlight-red</p>
+<p data-fragment-index="10" class="fragment highlight-green">highlight-green</p>
+<p data-fragment-index="11" class="fragment highlight-blue">highlight-blue</p>
+<p data-fragment-index="12" class="fragment current-visible">current-visible</p>
+<p data-fragment-index="13" class="fragment highlight-current-blue">highlight-current-blue</p>
+
+</section>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Spectacular image!</h1>
+
+  <p><a href="http://lab.hakim.se/meny/" class="image external"><img src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny" /></a></p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Export to PDF</h1>
+
+  <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export" class="external">exported to PDF</a>, below is an example that‘s been uploaded to SlideShare.</p>
+
+<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" style="height:356px;width:455px;margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+<script>
+  document.getElementById('slideshare').attributeName = 'allowfullscreen';
+</script>
+
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Take a Moment</h1>
+
+  <p>Press <code class="highlighter-rouge">b</code> or <code class="highlighter-rouge">period</code> on your keyboard to enter the ‚paused‘ mode. This mode is helpful when you want to take distracting slides off the screen during a presentation.</p>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide" >
+  <h1>Stellar Links</h1>
+
+  <ul>
+  <li><a href="http://slid.es" class="external">Try the online editor</a></li>
+  <li><a href="https://github.com/hakimel/reveal.js" class="external">Source code of Reveal.js on GitHub</a></li>
+  <li><a href="http://twitter.com/hakimel" class="twitter">Hakim El Hattab on Twitter</a></li>
+</ul>
+
+<h3 id="reveal-jekyll">reveal-jekyll</h3>
+
+<p>Made for my workshop <a href="http://rp14.tasmo.de/#/" class="external">„re:claim your blog engine“</a> at <a href="http://re-publica.de/session/einfach-bloggen-markdown-text-git-und-jekyll" class="external">re:publica 2014</a>.</p>
+
+<ul>
+  <li><a href="https://github.com/tasmo/reveal-jekyll" class="external">This source code on GitHub</a></li>
+  <li>
+    <p><a href="http://twitter.com/_tasmo" class="twitter">Thomas Friese on Twitter</a></p>
+  </li>
+  <li><a href="http://jekyllrb.com/" class="external">Jekyll</a></li>
+  <li><a href="http://ethanschoonover.com/solarized" class="external">Solarized colors</a></li>
+</ul>
+
+</section>
+	<div class="page-break"></div>
+
+	<section  class="step slide"  data-background="black">
+  
+
+  <h3 data-fragment-index="1" class="fragment fade-out" style="-webkit-transition-duration: 3s; -moz-transition-duration: 3s; transition-duration: 3s; -webkit-transition-delay: 3s; -moz-transition-delay: 3s; transition-delay: 3s;">this is</h3>
+<h1 data-fragment-index="1" class="fragment fade-in" style="-webkit-transition-duration: 2s; -moz-transition-duration: 2s; transition-duration: 2s;"><span data-fragment-index="1" class="fragment fade-out" style="-webkit-transition-duration: 6s; -moz-transition-duration: 6s; transition-duration: 6s; -webkit-transition-delay: 9s; -moz-transition-delay: 9s; transition-delay: 9s;">the end</span></h1>
+<h6 data-fragment-index="1" class="fragment fade-in" style="-webkit-transition-duration: 2s; -moz-transition-duration: 2s; transition-duration: 2s; -webkit-transition-delay: 3s; -moz-transition-delay: 3s; transition-delay: 3s;"><span data-fragment-index="1" class="fragment fade-out" style="-webkit-transition-duration: 3s; -moz-transition-duration: 3s; transition-duration: 3s; -webkit-transition-delay: 6s; -moz-transition-delay: 6s; transition-delay: 6s;">(at this point the grand finale is playing)</span></h6>
+<p><span data-fragment-index="1" class="fragment fade-in" style="-webkit-transition-duration: 2s; -moz-transition-duration: 2s; transition-duration: 2s; -webkit-transition-delay: 14s; -moz-transition-delay: 14s; transition-delay: 14s;">“<a href="https://github.com/tasmo/reveal-jekyll">reveal-jekyll</a>” by <a href="http://tasmo.rocks/">Thomas Friese</a></span></p>
+
+</section>
+	<div class="page-break"></div>
+
+
+
+
+
+		</div>
+	</div>
+	<script src="presentation-js1/reveal.js/lib/js/head.min.js"></script>
+<script src="presentation-js1/reveal.js/js/reveal.js"></script>
+
+<!-- reveal.js init -->
+<script>
+  var baseUrl = "presentation-js1"
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    
+    controls: true,
+    progress: true,
+    history: true,
+    keyboard: true,
+    overview: true,
+    center: true,
+    touch: true,
+    loop: false,
+    fragments: true,
+    transition: 'linear',
+    backgroundTransition: 'slide',
+    width: 1000,
+    height: 920,
+    margin: '0.1',
+    minScale: '0.2',
+    maxScale: '1.5',
+    
+    
+
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+      // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+      { src: baseUrl + '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+      // Zoom in and out with Alt+click
+      { src: baseUrl + '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+
+      // Speaker notes
+      { src: baseUrl + '/reveal.js/plugin/notes/notes.js', async: true },
+
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: baseUrl + '/reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+      // MathJax
+      { src: baseUrl + '/reveal.js/plugin/math/math.js', async: true }
+    ]
+  });
+
+  
+  // Shows the slide number using default formatting
+  Reveal.configure({ slideNumber: true });
+  Reveal.configure({ slideNumber: 'c/t' });
+  
+</script>
+<!-- End reveal.js init -->
+
+<!-- Fontawesome -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    //$("a[href*='youtube.com/']").prepend( $( "<i class='fa fa-youtube-play'>&nbsp;</i>" ) );
+    //$("a[href*='vimeo.com/']").prepend( $( "<i class='fa fa-vimeo-square'>&nbsp;</i>" ) );
+    //$("a[href$='/download']").prepend( $( "<i class='fa fa-cloud-download'>&nbsp;</i>" ) );
+    //$("a.download").prepend( $( "<i class='fa fa-cloud-download'>&nbsp;</i>" ) );
+    $("a.external").append( $( "<i class='fa fa-external-link'></i>" ) );
+    $("a.twitter").append( $( "<i class='fa fa-twitter'></i>" ) );
+    $("a.github").append( $( "<i class='fa fa-github'></i>" ) );
+    $("blockquote").prepend( $( "<i class='fa fa-quote-left'></i>" ) );
+    $("a.button.lighter").click( function() { $("html.dark").removeClass("dark").addClass("light"); });
+    $("a.button.darker").click( function() { $("html.light").removeClass("light").addClass("dark"); });
+  });
+</script>
+<!-- End Fontawesome -->
+
+</body>
+</html>
+

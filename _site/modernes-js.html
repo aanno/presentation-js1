@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      <ul>
+  <li>Komplettes HTML wird von JavaScript erzeugt</li>
+  <li>Keine Seiten mehr - Application wird (nur) am Anfang geladen: <br />
+<strong>Single Page Application</strong> (SPA)</li>
+  <li>Die Applikation benutzt sehr viele JS Komponenten (&gt; 100)</li>
+  <li>Komponentenmanagement und Build System auf Basis von <strong>Node.js</strong></li>
+  <li>Browserunterscheide werden durch <strong>Polyfills</strong> ausgebügelt</li>
+  <li>Serveranbingung über <strong>REST</strong> oder <strong>GraphQL</strong></li>
+</ul>
+
+    </div>
+  </div>
+</body>
+</html>
+

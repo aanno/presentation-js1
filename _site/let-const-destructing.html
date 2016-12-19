@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+<title>Moderne JavaScript Entwicklung (Teil I)</title>
+
+<meta name="author" content="Thomas Pasch">
+<meta name="description" content="Moderne Browser One Page Applications entwickeln Teil 1 - Grundlagen und Setup">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="presentation-js1/assets/css/style.css">
+<!-- jQuery -->
+<script src="presentation-js1/assets/js/jquery-1.11.1.min.js"></script>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+	if( window.location.search.match( /print-pdf/gi ) ) {
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = 'presentation-js1/reveal.js/css/print/pdf.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	}
+</script>
+
+<!--[if lt IE 9]>
+<script src="presentation-js1/reveal.js/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="step">
+      
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// let and const</span>
+<span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span>
+    <span class="p">{</span>
+      <span class="c1">// okay, block scoped name</span>
+      <span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"sneaky"</span>
+      <span class="c1">// error, const</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="s2">"foo"</span>
+    <span class="p">}</span>
+    <span class="c1">// error, already declared in block</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"inner"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// DESTRUCTION</span>
+
+<span class="c1">// list matching</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c1">// object matching</span>
+<span class="kd">let</span> <span class="p">{</span> <span class="na">op</span><span class="p">:</span> <span class="nx">a</span><span class="p">,</span> <span class="na">lhs</span><span class="p">:</span> <span class="p">{</span> <span class="na">op</span><span class="p">:</span> <span class="nx">b</span> <span class="p">},</span> <span class="na">rhs</span><span class="p">:</span> <span class="nx">c</span> <span class="p">}</span>
+       <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// object matching shorthand</span>
+<span class="c1">// binds `op`, `lhs` and `rhs` in scope</span>
+<span class="kd">let</span> <span class="p">{</span><span class="nx">op</span><span class="p">,</span> <span class="nx">lhs</span><span class="p">,</span> <span class="nx">rhs</span><span class="p">}</span> <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// Can be used in parameter position</span>
+<span class="kd">function</span> <span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="nx">x</span><span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">g</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+
+<span class="c1">// Fail-soft destructuring</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="kc">undefined</span>
+
+<span class="c1">// Fail-soft destructuring with defaults</span>
+<span class="kd">let</span> <span class="p">[</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="mi">1</span></code></pre></figure>
+
+
+    </div>
+  </div>
+</body>
+</html>
+
