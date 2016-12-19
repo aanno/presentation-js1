@@ -2,7 +2,6 @@ _site/
 .sass-cache/
 .jekyll-metadata
 reveal-jekyll
-reveal.js
 out
 .idea
 js1.iml
