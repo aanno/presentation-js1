@@ -21,3 +21,10 @@ fetch('flowers.jpg')
 
 </section>
 
+<section markdown="1">
+
+ * `Promise`s sind eine Alternative zur Callback Hölle
+ * Mehr im 2. Teil des Vortrages
+
+</section>
+

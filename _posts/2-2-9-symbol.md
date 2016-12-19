@@ -4,16 +4,26 @@ title: Symbole
 id: es6-symbol
 ---
 {% highlight javascript %}
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-    let nodes = document.querySelectorAll( selector )
-    for (let i = 0, len = nodes.length; i &lt; len; ++i) {
-      let node = nodes[i]
-      if( !node.className ) {
-        node.className += ' roll'
-      }
+let MyClass = (function() {
+
+  // module scoped symbol
+  let key = Symbol("key")
+
+  function MyClass(privateData) {
+    this[key] = privateData;
+  }
+
+  MyClass.prototype = {
+    doStuff: function() {
+      ... this[key] ...
     }
   }
-}
+
+  return MyClass
+})()
+
+var c = new MyClass("hello")
+// Keine Sichtbarkeit des Properties von außen
+c["key"] === undefined
 {% endhighlight %}
 

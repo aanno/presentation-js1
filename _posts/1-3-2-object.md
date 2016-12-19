@@ -10,7 +10,7 @@ id: es5-object
 x = 42
 // creates the property y on the global object, 
 // and marks it as non-configurable
-var y = 43;     
+var y = 43
 myobj = {
   h: 4,
   k: 5,

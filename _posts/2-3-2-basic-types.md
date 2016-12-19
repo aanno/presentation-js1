@@ -28,14 +28,15 @@ let list: number[] = [1, 2, 3]
 
 {% highlight typescript %}
 // Declare a tuple type
-let x: [string, number];
+let x: [string, number]
 // Initialize it
-x = ["hello", 10]; // OK
+x = ["hello", 10] // OK
 // Initialize it incorrectly
-x = [10, "hello"]; // Error
+x = [10, "hello"] // Error
 
-console.log(x[0].substr(1)); // OK
-console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
+console.log(x[0].substr(1)) // OK
+console.log(x[1].substr(1)) 
+// Error, 'number' does not have 'substr'
 {% endhighlight %}
 
 </section>
@@ -45,20 +46,22 @@ console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
 ### Any und Object
 
 {% highlight typescript %}
-let notSure: any = 4;
-notSure = "maybe a string instead";
-notSure = false; // okay, definitely a boolean
+let notSure: any = 4
+notSure = "maybe a string instead"
+notSure = false // okay, definitely a boolean
 
-let notSure: any = 4;
-notSure.ifItExists(); // okay, ifItExists might exist at runtime
-notSure.toFixed(); // okay, toFixed exists (but the compiler doesn't check)
+let notSure: any = 4
+notSure.ifItExists() // okay, ifItExists might exist at runtime
+notSure.toFixed() 
+// okay, toFixed exists (but the compiler doesn't check)
 
-let prettySure: Object = 4;
-prettySure.toFixed(); // Error: Property 'toFixed' doesn't exist on type 'Object'.
+let prettySure: Object = 4
+prettySure.toFixed() 
+// Error: Property 'toFixed' doesn't exist on type 'Object'.
 
-let list: any[] = [1, true, "free"];
+let list: any[] = [1, true, "free"]
 
-list[1] = 100;
+list[1] = 100
 {% endhighlight %}
 
 </section>
@@ -71,20 +74,20 @@ list[1] = 100;
 function warnUser(): void {
     alert("This is my warning message");
 }
-let unusable: void = undefined;
+let unusable: void = undefined
 
 // Not much else we can assign to these variables!
-let u: undefined = undefined;
-let n: null = null;
+let u: undefined = undefined
+let n: null = null
 
 // Function returning never must have unreachable end point
 function error(message: string): never {
-    throw new Error(message);
+    throw new Error(message)
 }
 
 // Inferred return type is never
 function fail() {
-    return error("Something failed");
+    return error("Something failed")
 }
 
 // Function returning never must have unreachable end point
@@ -101,9 +104,9 @@ function infiniteLoop(): never {
 ### Type assertions (Casts)
 
 {% highlight typescript %}
-let someValue: any = "this is a string";
+let someValue: any = "this is a string"
 
-let strLength: number = (someValue as string).length;
+let strLength: number = (someValue as string).length
 {% endhighlight %}
 
 </section>
@@ -114,8 +117,8 @@ let strLength: number = (someValue as string).length;
 
 {% highlight typescript %}
 interface SquareConfig {
-    color?: string;
-    width?: number;
+    color: string // required property
+    width?: number  // optional property
 }
 
 function createSquare(config: SquareConfig): {color: string; area: number} {
@@ -144,13 +147,13 @@ function identity<T>(arg: T): T {
 }
 let output = identity("myString");  // type of output will be 'string'
 
-
 interface Lengthwise {
     length: number
 }
 
 function loggingIdentity<T extends Lengthwise>(arg: T): T {
-    console.log(arg.length);  // Now we know it has a .length property, so no more error
+    console.log(arg.length)
+    // Now we know it has a .length property, so no more error
     return arg
 }
 {% endhighlight %}
@@ -166,9 +169,9 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 
 <section markdown="1">
 
-https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript
-https://www.typescriptlang.org/docs/handbook/basic-types.html
-https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
-https://www.typescriptlang.org/docs/handbook/symbols.html
+ * https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript
+ * https://www.typescriptlang.org/docs/handbook/basic-types.html
+ * https://basarat.gitbooks.io/typescript/content/docs/types/typeGuard.html
+ * https://www.typescriptlang.org/docs/handbook/symbols.html
 
 </section>

@@ -11,11 +11,11 @@ id: ts-advanced
 function extend<T, U>(first: T, second: U): T & U {
     let result = <T & U>{}
     for (let id in first) {
-        (<any>result)[id] = (<any>first)[id]
+        (result as any)[id] = (<any>first)[id]
     }
     for (let id in second) {
         if (!result.hasOwnProperty(id)) {
-            (<any>result)[id] = (<any>second)[id]
+            (result as any)[id] = (<any>second)[id]
         }
     }
     return result
@@ -54,9 +54,10 @@ function padLeft(value: string, padding: string | number) {
     throw new Error(`Expected string or number, got '${padding}'.`)
 }
 
-padLeft("Hello world", 4) // returns "    Hello world"
-
-let indentedString = padLeft("Hello world", true) // errors during compilation
+padLeft("Hello world", 4) 
+// returns "    Hello world"
+let indentedString = padLeft("Hello world", true) 
+// errors during compilation
 
 {% endhighlight %}
 
@@ -110,20 +111,13 @@ function getName(n: NameOrResolver): Name {
 
 <section markdown="1">
 
-{% highlight typescript %}
-{% endhighlight %}
-
-</section>
-
-<section markdown="1">
-
-https://www.typescriptlang.org/docs/handbook/advanced-types.html
-https://www.typescriptlang.org/docs/handbook/modules.html
-https://basarat.gitbooks.io/typescript/content/docs/async-await.html
-
-https://github.com/Microsoft/TypeScript/issues/3203
-http://blog.wolksoftware.com/working-with-react-and-typescript
-https://www.typescriptlang.org/docs/handbook/react-&-webpack.html
-https://github.com/Microsoft/TypeScript/issues/5478
+ * https://www.typescriptlang.org/docs/handbook/advanced-types.html
+ * https://www.typescriptlang.org/docs/handbook/modules.html
+ * https://basarat.gitbooks.io/typescript/content/docs/async-await.html
+ 
+ * https://github.com/Microsoft/TypeScript/issues/3203
+ * http://blog.wolksoftware.com/working-with-react-and-typescript
+ * https://www.typescriptlang.org/docs/handbook/react-&-webpack.html
+ * https://github.com/Microsoft/TypeScript/issues/5478
 
 </section>

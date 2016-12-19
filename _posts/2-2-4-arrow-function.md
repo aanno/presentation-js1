@@ -23,7 +23,7 @@ let bob = {
   _friends: [],
   printFriends() {
     this._friends.forEach(f =>
-      console.log(this._name + " knows " + f));
+      console.log(this._name + " knows " + f))
   }
 }
 {% endhighlight %}
@@ -50,3 +50,14 @@ setTimeout(function() { console.log(person.age); },2000)
 
 </section>
 
+<section markdown="1">
+
+### `this` and `function`
+
+ * Problem: `setTimeout(person.growOld,1000)` führt `growOld` im _Kontext_ von `window` aus
+ * Vorher: `windows.age === undefined`
+ * Nachher: `windows.age === NaN` (wegen `undefined + 1`)
+ * Besser `growOld` als Arrow Funktion
+ * Arrow Funktion bindet an das äußere `this` (kein späterer _Kontext_)
+
+</section>

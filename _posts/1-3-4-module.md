@@ -1,6 +1,6 @@
 ---
 layout: slide
-title: JavaScript Modul Systeme
+title: JavaScript Module Systeme
 id: es5-module
 ---
 <section markdown="1">
@@ -29,5 +29,16 @@ module.exports = {
 {% highlight javascript %}
 var greetings = require("./greetings.js");
 {% endhighlight %}
+
+</section>
+
+<section markdown="1">
+
+### Module Systeme
+
+ * In ES5 gab es diverse Module Systeme/Implementierungen
+   + CommonJS, AMD, Bower, RequireJS
+ * Unterschiedlich zwischen Node.js und Browser
+ * ES6 vereinheitlicht und vereinfacht
 
 </section>
