@@ -4,11 +4,11 @@ title: Generatoren
 id: es6-generator
 ---
 {% highlight javascript %}
-var fibonacci = {
+let fibonacci = {
   [Symbol.iterator]: function*() {
-    var pre = 0, cur = 1
+    let pre = 0, cur = 1
     for (;;) {
-      var temp = pre
+      let temp = pre
       pre = cur
       cur += temp
       yield cur
@@ -16,7 +16,7 @@ var fibonacci = {
   }
 }
 
-for (var n of fibonacci) {
+for (let n of fibonacci) {
   // truncate the sequence at 1000
   if (n > 1000)
     break

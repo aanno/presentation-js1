@@ -19,7 +19,7 @@ id: lodash
 
 {% highlight javascript %}
 
-var ownerArr = [{
+let ownerArr = [{
     "owner": "Colin",
     "pets": [{"name":"dog1"}, {"name": "dog2"}],
 }, {
@@ -46,14 +46,14 @@ _.map(ownerArr, 'pets[0].name');
 
 {% highlight javascript %}
 
-var objA = {
+let objA = {
     "name": "colin"
 }
 
 // Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript
 
 // Lodash
-var objB = _.cloneDeep(objA);
+let objB = _.cloneDeep(objA);
 objB === objA // false
 
 {% endhighlight %}
@@ -66,9 +66,9 @@ objB === objA // false
 
 {% highlight javascript %}
 
-var objA = {"name": "colin", "car": "suzuki"}
-var objB = {"name": "james", "age": 17}
-var objC = {"pet": "dog"}
+let objA = {"name": "colin", "car": "suzuki"}
+let objB = {"name": "james", "age": 17}
+let objC = {"pet": "dog"}
 
 // Lodash
 _.assign(objA, objB, objC)
@@ -86,13 +86,13 @@ _.assign(objA, objB, objC)
 
 // Naive method: Remove an array of keys from object
 Object.prototype.remove = function(arr) {
-    var that = this;
+    let that = this;
     arr.forEach(function(key){
         delete(that[key])
     })
 }
 
-var objA = {"name": "colin", "car": "suzuki", "age": 17}
+let objA = {"name": "colin", "car": "suzuki", "age": 17}
 objA.remove(['car', 'age'])
 objA; // {"name": "colin"}
 
@@ -109,7 +109,7 @@ objA = _.omit(objA, ['car', 'age']) // {"name": "colin"}
 
 {% highlight javascript %}
 
-var objA = {"name": "colin", "car": "suzuki", "age": 17}
+let objA = {"name": "colin", "car": "suzuki", "age": 17}
 
 // Lodash
 objA = _.omit(objA, 'car') // {"name": "colin", "age": 17}

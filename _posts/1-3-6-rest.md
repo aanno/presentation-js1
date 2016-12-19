@@ -11,7 +11,7 @@ id: server-rest
 Request URL:https://test.wroomer.com/v1/storage/filter/list
 Request Method:GET
 Status Code:200 OK
-Remote Address:91.90.149.67:443
+Remote Address:91.xxx.149.xxx:443
 {% endhighlight %}
 
 </section>

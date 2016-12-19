@@ -4,7 +4,7 @@ title: Enhanced Objects
 id: es6-enhanced-objects
 ---
 {% highlight javascript %}
-var obj = {
+let obj = {
     // __proto__
     __proto__: theProtoObj,
     // Shorthand for ‘handler: handler’

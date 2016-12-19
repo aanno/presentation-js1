@@ -10,7 +10,7 @@ id: es6-module
 export function sum(x, y) {
   return x + y
 }
-export var pi = 3.141593
+export let pi = 3.141593
 
 // Using a module
 // app.js
@@ -26,7 +26,7 @@ alert("2π = " + sum(pi, pi))
 
 // lib/mathplusplus.js
 export * from "lib/math"
-export var e = 2.71828182846
+export let e = 2.71828182846
 export default function(x) {
     return Math.log(x)
 }

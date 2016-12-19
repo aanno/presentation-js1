@@ -10,7 +10,7 @@ id: js-threading-modell
 klkljkj jhjh
 -->
 
-<img src="{{ site.url }}/assets/images/event-loop.png" alt="JS Event Loop" style="width: 1200px;"/>
+<img src="{{ site.url }}/assets/images/event-loop.png" alt="JS Event Loop" style="width: 1200px;"/>{: .stretch}
 Courtesy of [JS Event Loop Explained](http://blog.carbonfive.com/2013/10/27/the-javascript-event-loop-explained/){: .external .small}.
 
 </section>

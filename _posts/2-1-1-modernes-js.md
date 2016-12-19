@@ -4,9 +4,9 @@ title: Modernes JavaScript
 id: modernes-js
 ---
 * Komplettes HTML wird von JavaScript erzeugt
-* Es gibt keine Seiten mehr: Die Application wird (nur) am Anfang geladen: <br>
+* Keine Seiten mehr - Application wird (nur) am Anfang geladen: <br>
   **Single Page Application** (SPA)
 * Die Applikation benutzt sehr viele JS Komponenten (> 100)
-* Komponentenmanagement und Build System auf der Basis von **Node.js**
+* Komponentenmanagement und Build System auf Basis von **Node.js**
 * Browserunterscheide werden durch **Polyfills** ausgebügelt
 * Serveranbingung über **REST** oder **GraphQL**

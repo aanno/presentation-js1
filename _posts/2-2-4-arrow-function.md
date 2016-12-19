@@ -3,11 +3,13 @@ layout: slide
 title: Arrows vs. Functions
 id: es6-arrows
 ---
+<section markdown="1">
+
 {% highlight javascript %}
 // Expression bodies
-var odds = evens.map(v => v + 1)
-var nums = evens.map((v, i) => v + i)
-var pairs = evens.map(v => ({even: v, odd: v + 1}))
+let odds = evens.map(v => v + 1)
+let nums = evens.map((v, i) => v + i)
+let pairs = evens.map(v => ({even: v, odd: v + 1}))
 
 // Statement bodies
 nums.forEach(v => {
@@ -16,7 +18,7 @@ nums.forEach(v => {
 })
 
 // Lexical this
-var bob = {
+let bob = {
   _name: "Bob",
   _friends: [],
   printFriends() {
@@ -25,4 +27,26 @@ var bob = {
   }
 }
 {% endhighlight %}
+
+</section>
+
+<section markdown="1">
+
+### `this` and `function`
+
+{% highlight javascript %}
+function Person(age) {
+    this.age = age
+    this.growOld = function() {
+        this.age++
+    }
+}
+let person = new Person(1)
+setTimeout(person.growOld,1000)
+
+setTimeout(function() { console.log(person.age); },2000)
+// 1, should have been 2
+{% endhighlight %}
+
+</section>
 

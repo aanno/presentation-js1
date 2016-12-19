@@ -21,7 +21,7 @@ class MyArray extends Array {
 // Two-phase 'new':
 // 1) Call @@create to allocate object
 // 2) Invoke constructor on new instance
-var arr = new MyArray();
+let arr = new MyArray();
 arr[1] = 12
 arr.length == 2
 {% endhighlight %}
