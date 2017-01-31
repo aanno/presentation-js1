@@ -1721,7 +1721,7 @@ Traceur, Babel, Typescript</li>
     <li><a href="#/62">Alt Flux Implementierung</a></li>
   </ol>
 
-  <h4 id="thomas-pasch-fr-siteoshttpsiteosde-external">Thomas Pasch f�r <a href="http://siteos.de/" class="external">SiteOS</a></h4>
+  <h4 id="thomas-pasch-fr-siteoshttpsiteosde-external">Thomas Pasch für <a href="http://siteos.de/" class="external">SiteOS</a></h4>
 </section>
 
 </section>
@@ -1730,7 +1730,21 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Historie</h1>
 
-  
+  <section>
+
+  <ul>
+    <li><em>2011</em>: Walke startet die Entwicklung bei Facebook</li>
+    <li><em>2012</em>: Instagram benutzt React</li>
+    <li><em>2013</em>: Open Source (3-Clause BSD)</li>
+    <li><em>2016</em>: React 15.4.0</li>
+  </ul>
+
+</section>
+<section>
+  <ul>
+    <li>Vergleich: Angular 1 ab 2010, Angular 2 ab 2015</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1738,7 +1752,34 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Scope</h1>
 
-  
+  <section>
+  <ul>
+    <li>React ist reiner <em>Presentation Layer</em> (von <em>MVI</em>)</li>
+    <li>React ist eine <em>JS Library</em> (<em>kein</em> Framework)</li>
+    <li>React ist eine Gegenposition zu Angular 1</li>
+    <li>Haupteinsatzgebiet: Single Page Applications (SPA)</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>One-way data flow (Props and State)</li>
+    <li>JSX (als Art Template)</li>
+    <li>Virtual DOM</li>
+    <li>Isomorph (d.h. Server-seitiges Rendering) <em>möglich</em></li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>Komponenten-basiert</li>
+    <li>Template-basiert</li>
+    <li>Komponenten sind ES6 Klassen</li>
+    <li><em>keine</em> Vererbung</li>
+    <li>Komponenten sind <em>keine</em> DOM Nodes</li>
+    <li>Komponentenzustand read-only</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1746,7 +1787,45 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Umfeld</h1>
 
-  
+  <section>
+  <ul>
+    <li>Flux (~MVI Pattern)</li>
+    <li>React Native</li>
+    <li>React Router</li>
+    <li>Diverse Widgets (react-tabs, react-paginate, formsy-react, …)</li>
+    <li>classnames</li>
+  </ul>
+</section>
+
+<section></section>
+
+<section>
+
+  <p>React Native</p>
+
+  <ul>
+    <li>https://facebook.github.io/react-native/</li>
+    <li>http://www.reactnative.com/</li>
+  </ul>
+
+  <p>React Router</p>
+
+  <ul>
+    <li>https://reacttraining.com/react-router/</li>
+    <li>https://github.com/ReactTraining/react-router</li>
+    <li>https://github.com/ReactTraining/react-router-addons-routes</li>
+  </ul>
+
+  <p>Sonstiges</p>
+
+  <ul>
+    <li>http://christianalfoni.github.io/javascript/2014/10/22/nailing-that-validation-with-reactjs.html</li>
+    <li>https://github.com/christianalfoni/formsy-react</li>
+    <li>https://facebook.github.io/react/docs/addons.html</li>
+    <li>https://facebook.github.io/react/docs/create-fragment.html</li>
+  </ul>
+
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1754,7 +1833,9 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Architektur</h1>
 
-  
+  <section></section>
+
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1762,7 +1843,92 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>JSX</h1>
 
-  
+  <section>
+  <ul>
+    <li>XML Syntax Erweiterung für JS</li>
+    <li>Wird vom Transpiler in JS übersetzt</li>
+    <li>Transpiler Übersetzung konfigurierbar (<code class="highlighter-rouge">React.createElement()</code>)</li>
+    <li>Ergebnis: Sprache für Templates, aber volle JS Syntax</li>
+    <li>Kann für HTML verwendet werden</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="quellcode">Quellcode</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">element</span><span class="err">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"greeting"</span><span class="o">&gt;</span>
+    <span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="o">!</span>
+  <span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span><span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="transpiler">Transpiler</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">element</span><span class="err">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span>
+  <span class="s1">'h1'</span><span class="p">,</span>
+  <span class="p">{</span><span class="na">className</span><span class="p">:</span> <span class="s1">'greeting'</span><span class="p">},</span>
+  <span class="s1">'Hello, world!'</span>
+<span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="ausfhrung-createelement---react-element">Ausführung <code class="highlighter-rouge">createElement</code> -&gt; <em>React Element</em></h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// Note: this structure is simplified</span>
+<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">type</span><span class="p">:</span> <span class="s1">'h1'</span><span class="p">,</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">className</span><span class="p">:</span> <span class="s1">'greeting'</span><span class="p">,</span>
+    <span class="na">children</span><span class="p">:</span> <span class="s1">'Hello, world'</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="keine-html-bzw-js-injection">Keine HTML bzw. JS Injection</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">title</span><span class="err">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">potentiallyMaliciousInput</span>
+<span class="c1">// This is safe:</span>
+<span class="kd">const</span> <span class="nx">element</span><span class="err">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1&gt;</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="jsx-und-js-ausdrcke">JSX und JS Ausdrücke</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// Inside a React Component ...</span>
+<span class="nx">getGreeting</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">formatName</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">)}</span><span class="o">!&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">avatarUrl</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span><span class="p">}</span>
+
+<span class="nx">formatName</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">lastName</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Harper'</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="s1">'Perez'</span><span class="p">,</span>
+  <span class="na">avatarUrl</span><span class="p">:</span> <span class="s1">'http://...'</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+
+</section>
+
 
 </section>
 	<div class="page-break"></div>
@@ -1770,7 +1936,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Komponenten</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1778,7 +1945,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Lebenzyklus</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1786,7 +1954,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Props und State</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1794,7 +1963,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Container</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1802,7 +1972,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Formulare</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1810,7 +1981,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Mehrere Komponenten</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1818,7 +1990,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Warum Flux?</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1826,7 +1999,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Was ist Flux?</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1834,7 +2008,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Historie</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1842,7 +2017,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Scope</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1850,7 +2026,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Implementierungen</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1858,7 +2035,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Alternativen</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
@@ -1866,7 +2044,8 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Pro und Contra</h1>
 
-  
+  <section></section>
+<section></section>
 
 </section>
 	<div class="page-break"></div>
