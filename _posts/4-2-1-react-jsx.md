@@ -85,7 +85,8 @@ const user = {
 </section>
 
 <section markdown="1">
-{% highlight typescript %}
-{% endhighlight %}
+* https://facebook.github.io/react/docs/introducing-jsx.html
+* https://www.typescriptlang.org/docs/handbook/jsx.html
+* https://basarat.gitbooks.io/typescript/content/docs/jsx/tsx.html
 </section>
 

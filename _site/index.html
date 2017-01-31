@@ -1837,6 +1837,22 @@ Traceur, Babel, Typescript</li>
 
 <section></section>
 
+<section>
+  <ol>
+    <li>Break The UI Into A Component Hierarchy</li>
+    <li>Build A Static Version in React</li>
+    <li>Identify The Minimal (but complete) Representation Of UI State</li>
+    <li>Identify Where Your State Should Live</li>
+    <li>Add Inverse Data Flow</li>
+  </ol>
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/thinking-in-react.html</li>
+  </ul>
+</section>
+
 </section>
 	<div class="page-break"></div>
 
@@ -1926,7 +1942,11 @@ Traceur, Babel, Typescript</li>
 </section>
 
 <section>
-
+  <ul>
+    <li>https://facebook.github.io/react/docs/introducing-jsx.html</li>
+    <li>https://www.typescriptlang.org/docs/handbook/jsx.html</li>
+    <li>https://basarat.gitbooks.io/typescript/content/docs/jsx/tsx.html</li>
+  </ul>
 </section>
 
 
@@ -1936,8 +1956,118 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Komponenten</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <ul>
+    <li>Props are Read-Only</li>
+    <li>Do Not Modify State Directly</li>
+    <li>State Updates May Be Asynchronous</li>
+    <li>State Updates are Merged</li>
+    <li>Data Flows Down</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="eine-einfache-komponente-">Eine einfache Komponente …</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">IWelcome</span> <span class="p">{</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Welcome</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IWelcome</span><span class="p">,</span> <span class="p">{}</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="wird-benutzt">… wird benutzt</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">element</span><span class="err">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Welcome</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"Sara"</span> <span class="o">/&gt;</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+  <span class="nx">element</span><span class="p">,</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'root'</span><span class="p">)</span>
+<span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+  <h3 id="wird-mehrmals-benutzt">… wird mehrmals benutzt</h3>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">element</span><span class="err">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Welcome</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"Sara"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Welcome</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"Cahal"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Welcome</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"Edite"</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="p">)</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+  <span class="nx">element</span><span class="p">,</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'root'</span><span class="p">)</span>
+<span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+
+  <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">IClockComponentState</span> <span class="p">{</span>
+    <span class="nl">date</span><span class="p">:</span> <span class="nb">Date</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">Clock</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="p">{},</span> <span class="nx">IClockComponentState</span><span class="o">&gt;</span> <span class="p">{</span>
+
+  <span class="na">timerID</span><span class="p">:</span> <span class="kr">number</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">date</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()};</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">timerID</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span>
+      <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">(),</span>
+      <span class="mi">1000</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">timerID</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">tick</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">date</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()})</span>
+  <span class="p">}</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="o">!&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">It</span> <span class="k">is</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">toLocaleTimeString</span><span class="p">()}.</span><span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">Clock</span> <span class="o">/&gt;</span><span class="p">,</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'root'</span><span class="p">)</span>
+<span class="p">)</span></code></pre></figure>
+
+</section>
+
+<section>
+
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/components-and-props.html</li>
+    <li>https://facebook.github.io/react/docs/state-and-lifecycle.html</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1945,8 +2075,140 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Lebenzyklus</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <ul>
+    <li><em>Mounting</em>: Erzeugung und Einfügen in den DOM Baum</li>
+    <li><em>Updating</em>: Änderung an Props bzw. State, nicht beim 1. rendern</li>
+    <li><em>Unmounting</em>: Element wird aus DOM Baum entfernt</li>
+    <li><em>Andere APIs</em>: Wichtig, aber nicht direkt Lebenszyklus</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="mounting">Mounting</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">constructor(props)</code>:
+      <ul>
+        <li><em>Vor</em> dem Einfügen</li>
+        <li>Zugriff auf Props</li>
+        <li>State kann initialisiert werden</li>
+        <li>Anti-Pattern: State anhand der Props initialisieren</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="updating-1">Updating 1</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">componentWillMount()</code>:
+      <ul>
+        <li>direkt <em>vor</em> dem Einfügen</li>
+        <li><em>keine</em> Seiteneffekte</li>
+        <li>State Änderung mit <code class="highlighter-rouge">setState</code> möglich</li>
+      </ul>
+    </li>
+    <li><code class="highlighter-rouge">componentDidMount()</code>:
+      <ul>
+        <li>direkt <em>nach</em> dem Einfügen</li>
+        <li>gute Stelle für <code class="highlighter-rouge">Actions</code> (und <code class="highlighter-rouge">Store.listen</code>)</li>
+        <li>State Änderung führt zum Re-<code class="highlighter-rouge">render()</code>n</li>
+      </ul>
+    </li>
+    <li><code class="highlighter-rouge">componentWillReceiveProps(nextProps)</code>:
+      <ul>
+        <li>Props habe sich <em>möglicherweise</em> geändert</li>
+        <li>Wird nicht beim Mounten aufgerufen</li>
+        <li>State Änderung mit <code class="highlighter-rouge">setState</code> möglich</li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="updating-2">Updating 2</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">shouldComponentUpdate(nextProps, nextState): boolean</code>:
+      <ul>
+        <li>default: <code class="highlighter-rouge">return true</code></li>
+        <li>Wird <em>nicht</em> fürs 1. rendern und <em>nicht</em> bei <code class="highlighter-rouge">forceUpdate</code> aufgerufen</li>
+        <li>Performance Optimierung</li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="updating-3">Updating 3</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">componentWillUpdate(nextProps, nextState)</code>:
+      <ul>
+        <li>direkt <em>vor</em> dem Update, wenn sich Props bzw. State geändert haben</li>
+        <li>nur wenn <code class="highlighter-rouge">shouldComponentUpdate</code> <code class="highlighter-rouge">true</code> zurück gab</li>
+        <li>State Änderung <em>nicht</em> möglich</li>
+      </ul>
+    </li>
+    <li><code class="highlighter-rouge">componentDidUpdate(prevProps, prevState)</code>:
+      <ul>
+        <li>direkt <em>nach</em> dem Update, wenn sich Props bzw. State geändert haben</li>
+        <li>nur wenn <code class="highlighter-rouge">shouldComponentUpdate</code> <code class="highlighter-rouge">true</code> zurück gab</li>
+        <li>gute Stelle für manuelle DOM Änderungen (fortgeschritten!)</li>
+        <li>gute Stelle für Actions</li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="unmounting">Unmounting</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">componentWillUnmount()</code>:
+      <ul>
+        <li>direkt <em>vor</em> dem Entfernen aus dem DOM Baum</li>
+        <li>cleanup (z.B. <code class="highlighter-rouge">Store.unlisten</code>, timer)</li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="andere-apis">Andere APIs</h3>
+
+  <ul>
+    <li><code class="highlighter-rouge">setState(nextState, callback?)</code>:
+      <ul>
+        <li><em>Niemals</em> State direkt setzen, immer <code class="highlighter-rouge">setState</code> benutzen</li>
+        <li>Verursacht einen <em>shallow merge</em></li>
+        <li>callback ist <em>deprecated</em> (ähnlich wie <code class="highlighter-rouge">componentDidUpdate</code>)</li>
+        <li>ruft implizit <code class="highlighter-rouge">shouldComponentUpdate</code></li>
+        <li>löst meist ein Re-<code class="highlighter-rouge">render</code>n aus</li>
+      </ul>
+    </li>
+    <li><code class="highlighter-rouge">forceUpdate()</code>:
+      <ul>
+        <li>erzwingt ein Re-<code class="highlighter-rouge">render</code>n</li>
+        <li>ruft <em>nicht</em> <code class="highlighter-rouge">shouldComponentUpdate</code> auf</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/react-component.html</li>
+    <li>https://facebook.github.io/react/docs/create-fragment.html</li>
+    <li>https://facebook.github.io/react/docs/lifting-state-up.html</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1954,8 +2216,61 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Props und State</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <h3 id="gemeinsamkeiten">Gemeinsamkeiten</h3>
+
+  <ul>
+    <li>Bilden gemeinsam den Zustand der Komponente</li>
+    <li>Änderungen bekommt die Komponente ‚automatisch‘ mit</li>
+    <li>Bei Änderungen wird (meist) <code class="highlighter-rouge">render</code> ausgelöst</li>
+    <li>Die Komponente sollte den Zustand nicht direkt ändern</li>
+    <li>Zustand sollte in <code class="highlighter-rouge">render</code> auch verwendet werden
+(Ansonsten reicht eine Instanzvariable)</li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="props">Props</h3>
+
+  <ul>
+    <li>Werden durch ein JSX Attribut gesetzt</li>
+    <li>Kommen daher aus der übergeordneten Komponente</li>
+    <li>Read-Only</li>
+    <li>Funktionaler ‚Anteil‘ der Komponente</li>
+    <li>Komponenten <em>nur</em> mit Props (ohne State) sind
+      <ul>
+        <li>rein funktional</li>
+        <li>einfach wieder zu verwenden</li>
+        <li>einfach zu verstehen</li>
+      </ul>
+    </li>
+  </ul>
+
+</section>
+
+<section>
+  <h3 id="state">State</h3>
+
+  <ul>
+    <li>Kommt (meist) aus einem Flux-Store
+      <ul>
+        <li>subscribe/listen notwendig</li>
+        <li>unsubscribe/unlisten notwendig</li>
+      </ul>
+    </li>
+    <li>Geeignet für Seiteneffekte und asynchrone Änderungen</li>
+    <li>Nur über <code class="highlighter-rouge">setState</code> ändern</li>
+    <li>‚shallow merge‘ durch <code class="highlighter-rouge">setState</code></li>
+  </ul>
+
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/react-component.html</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -1973,7 +2288,17 @@ Traceur, Babel, Typescript</li>
   <h1>Formulare</h1>
 
   <section></section>
+
 <section></section>
+
+<section></section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/forms.html#controlled-components</li>
+    <li>https://facebook.github.io/react/docs/uncontrolled-components.html</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
