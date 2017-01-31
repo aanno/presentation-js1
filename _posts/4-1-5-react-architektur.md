@@ -4,17 +4,16 @@ title: Architektur
 id: react-architektur
 ---
 <section markdown="1">
+* Top-Down Datenfluss
+* Besonders geeignet, wenn Zustand in einer unveränderlichen und flachen Datenstruktur
 </section>
 
 <section markdown="1">
-</section>
-
-<section markdown="1">
-1. Break The UI Into A Component Hierarchy
-1. Build A Static Version in React
-1. Identify The Minimal (but complete) Representation Of UI State
-1. Identify Where Your State Should Live
-1. Add Inverse Data Flow
+1. UI in Komponenten zerlegen
+1. Statische Version des UI in React implementieren
+1. Minimale (aber vollständige) Zustandsrepresentation des UI identifizieren 
+1. Zustand aufteilen (Stores, Props, State)
+1. Inversen Datenfluss hinzufügen (mittels Flux)
 </section>
 
 <section markdown="1">

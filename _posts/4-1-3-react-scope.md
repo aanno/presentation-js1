@@ -11,7 +11,7 @@ id: react-scope
 </section>
 
 <section markdown="1">
-* One-way data flow (Props and State)
+* One-way Datenfluss (Props und State)
 * JSX (als Art Template)
 * Virtual DOM
 * Isomorph (d.h. Server-seitiges Rendering) _möglich_

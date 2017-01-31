@@ -1763,7 +1763,7 @@ Traceur, Babel, Typescript</li>
 
 <section>
   <ul>
-    <li>One-way data flow (Props and State)</li>
+    <li>One-way Datenfluss (Props und State)</li>
     <li>JSX (als Art Template)</li>
     <li>Virtual DOM</li>
     <li>Isomorph (d.h. Server-seitiges Rendering) <em>möglich</em></li>
@@ -1833,17 +1833,20 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Architektur</h1>
 
-  <section></section>
-
-<section></section>
+  <section>
+  <ul>
+    <li>Top-Down Datenfluss</li>
+    <li>Besonders geeignet, wenn Zustand in einer unveränderlichen und flachen Datenstruktur</li>
+  </ul>
+</section>
 
 <section>
   <ol>
-    <li>Break The UI Into A Component Hierarchy</li>
-    <li>Build A Static Version in React</li>
-    <li>Identify The Minimal (but complete) Representation Of UI State</li>
-    <li>Identify Where Your State Should Live</li>
-    <li>Add Inverse Data Flow</li>
+    <li>UI in Komponenten zerlegen</li>
+    <li>Statische Version des UI in React implementieren</li>
+    <li>Minimale (aber vollständige) Zustandsrepresentation des UI identifizieren</li>
+    <li>Zustand aufteilen (Stores, Props, State)</li>
+    <li>Inversen Datenfluss hinzufügen (mittels Flux)</li>
   </ol>
 </section>
 
@@ -2306,8 +2309,26 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Mehrere Komponenten</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <h3 id="informationsfluss-uere-zu-innerer-komponente">Informationsfluss äußere zu innerer Komponente</h3>
+
+  <ul>
+    <li>Mittels Props einfach möglich</li>
+    <li>Einfach zu verstehen</li>
+    <li>Eingängige Syntax</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="informationsfluss-innere-zu-uerer-komponete">Informationsfluss innere zu äußerer Komponete</h3>
+
+  <ul>
+    <li>Work-around: Mit Props auch Callbacks an innere Komponente übergeben</li>
+    <li>Innere Komponente kann die Callbacks dann aufrufen</li>
+    <li>Deutlich schwieriger zu verstehen</li>
+    <li>Komplizierte Syntax, da für die Callbacks auf ES6 Instanzmethoden <code class="highlighter-rouge">bind</code> benötigt wird</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -2315,8 +2336,14 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Warum Flux?</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <ul>
+    <li>Informationsfluss zwischen direkt umschließenden Komponenten ist kein Problem</li>
+    <li>Aber was, wenn nicht benachbarte Komponenten den gleichen Zustand verwenden?</li>
+    <li>Benötigt wird eine Art MV* Pattern, das möglichst zudem auch den Top-Down Datenfluss unterstützt</li>
+    <li>Facebook hat dafür das Flux Pattern erfunden</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -2324,8 +2351,28 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Was ist Flux?</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <ul>
+    <li>Flux wurde von Facebook für React entworfen</li>
+    <li>Flux wird vor allem mit React verwendet</li>
+    <li>Reaktion auf das missglückte <em>2-way-binding</em> aus Angular 1</li>
+    <li>React kann auch ohne Flux verwendet werde</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>Top-Down Datenfluss</li>
+    <li>Besonders geeignet, wenn Zustand in einer unveränderlichen und flachen Datenstruktur</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/flux/docs/in-depth-overview.html#content</li>
+    <li>https://medium.com/hacking-and-gonzo/flux-vs-mvc-design-patterns-57b28c0f71b7#.oh4jq95t0</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -2333,8 +2380,23 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Historie</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <ul>
+    <li>Ursprünglich Pattern <em>und</em> Implementierung von Facebook</li>
+    <li>Implementierung ab Mitte 2014 auf github</li>
+    <li>Mittlerweile gibt es viele (bessere!) Flux Implementierungen</li>
+    <li>Besonders angesagt: Redux</li>
+    <li>In Wroomer verwendet: Alt</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/flux/docs/in-depth-overview.html</li>
+    <li>https://github.com/facebook/flux/tree/master/examples</li>
+    <li>https://github.com/facebook/flux/graphs/contributors</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
@@ -2342,7 +2404,14 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Scope</h1>
 
-  <section></section>
+  <section>
+  <ul>
+    <li>Flux ist eine alternative zu MV* Pattern</li>
+    <li>Flux und MVI sind sich <em>sehr</em> ähnlich</li>
+    <li>Flux Implementierungen sind Libraries (keine Frameworks)</li>
+  </ul>
+</section>
+
 <section></section>
 
 </section>
@@ -2369,8 +2438,28 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Pro und Contra</h1>
 
-  <section></section>
-<section></section>
+  <section>
+  <h3 id="pro">Pro</h3>
+  <ul>
+    <li>React SPAs setzen fast ausschließlich auf Flux</li>
+    <li>Es gibt mehrere ausgereifte Implementierungen</li>
+    <li>Das Datenflussmodell ist konzeptionell einfach zu verstehen</li>
+    <li>Die typischen Beispiel Apps lassen sich mit Flux einfach umsetzen</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="kontra">Kontra</h3>
+  <ul>
+    <li>Zu viele Implementierungen, die sich nur in Details unterscheiden</li>
+    <li>Vielzahl von Möglichkeiten, 
+Flux falsch oder schlecht zu verwenden</li>
+    <li>Flux hat Probleme mit Datenreihen und zeitlichen Abfolgen</li>
+    <li>Flux hat Probleme mit Datenabhängigkeiten</li>
+    <li>Flux hat Probleme mit asynchronen Ereignissen</li>
+    <li>Flux ist die Hölle mit asynchronen Datenabhängigkeiten</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
