@@ -5,7 +5,8 @@ id: react-lebenszyklus
 ---
 <section markdown="1">
 * *Mounting*: Erzeugung und Einfügen in den DOM Baum
-* *Updating*: Änderung an Props bzw. State, nicht beim 1. rendern
+* *Updating*: Änderung an Props bzw. State<br/>
+  (nicht beim 1. Rendern)
 * *Unmounting*: Element wird aus DOM Baum entfernt
 * *Andere APIs*: Wichtig, aber nicht direkt Lebenszyklus
 </section>
@@ -25,7 +26,7 @@ id: react-lebenszyklus
 
 * `componentWillMount()`: 
    + direkt _vor_ dem Einfügen
-   + _keine_ Seiteneffekte
+   + _keine_ Seiteneffekte erlaubt
    + State Änderung mit `setState` möglich
 * `componentDidMount()`: 
    + direkt _nach_ dem Einfügen
@@ -43,7 +44,8 @@ id: react-lebenszyklus
 
 * `shouldComponentUpdate(nextProps, nextState): boolean`:
   + default: `return true`
-  + Wird _nicht_ fürs 1. rendern und _nicht_ bei `forceUpdate` aufgerufen
+  + Wird _nicht_ fürs 1. Rendern und <br/>
+    _nicht_ bei `forceUpdate` aufgerufen
   + Performance Optimierung
 
 </section>
@@ -78,7 +80,8 @@ id: react-lebenszyklus
 * `setState(nextState, callback?)`:
   + *Niemals* State direkt setzen, immer `setState` benutzen
   + Verursacht einen _shallow merge_
-  + callback ist _deprecated_ (ähnlich wie `componentDidUpdate`)
+  + callback ist _deprecated_<br/>
+    (ähnlich wie `componentDidUpdate`)
   + ruft implizit `shouldComponentUpdate`
   + löst meist ein Re-`render`n aus
 * `forceUpdate()`:

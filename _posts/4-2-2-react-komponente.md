@@ -4,11 +4,11 @@ title: Komponenten
 id: react-komponente
 ---
 <section markdown="1">
-* Props are Read-Only
-* Do Not Modify State Directly
-* State Updates May Be Asynchronous
-* State Updates are Merged
-* Data Flows Down
+* Props sind Read-Only
+* State niemals direct verändern
+* State Änderungen dürfen asynchron sein
+* State Änderungen werden (flach) verschmolzen
+* Top-Down Datenfluss
 </section>
 
 <section markdown="1">
