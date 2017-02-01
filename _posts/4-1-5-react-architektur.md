@@ -21,5 +21,24 @@ id: react-architektur
 </section>
 
 <section markdown="1">
+### Woher kommt die Geschwindigkeit?
+
+* Virtual DOM
+* Leichtgewichtige Komponenten
+* Vergleich zwischen alten und neuen Komponentenbaum
+* Nur Änderungen werden ins 'richtige' DOM eingebaut
+</section>
+
+<section markdown="1">
+### Vergleicht mit Angular 2
+
+* _kein_ ~~Virtual DOM~~
+* Benutzung von WebWorkern zum Event Dispatch (2 Threads)
+* Ìnterne Verwendung on `zone.js`: thread-local storage
+* Kann mit 'Web Components' zusammen arbeiten
+* Support for 'Shadow DOM'
+</section>
+
+<section markdown="1">
 * https://facebook.github.io/react/docs/thinking-in-react.html
 </section>

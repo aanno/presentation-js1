@@ -1736,10 +1736,11 @@ Traceur, Babel, Typescript</li>
     <li><em>2011</em>: Walke startet die Entwicklung bei Facebook</li>
     <li><em>2012</em>: Instagram benutzt React</li>
     <li><em>2013</em>: Open Source (3-Clause BSD)</li>
-    <li><em>2016</em>: React 15.4.0</li>
+    <li><em>2016</em>: React 15.4.2</li>
   </ul>
 
 </section>
+
 <section>
   <ul>
     <li>Vergleich: Angular 1 ab 2010, Angular 2 ab 2015</li>
@@ -1852,6 +1853,29 @@ Traceur, Babel, Typescript</li>
     <li>Zustand aufteilen (Stores, Props, State)</li>
     <li>Inversen Datenfluss hinzufügen (mittels Flux)</li>
   </ol>
+</section>
+
+<section>
+  <h3 id="woher-kommt-die-geschwindigkeit">Woher kommt die Geschwindigkeit?</h3>
+
+  <ul>
+    <li>Virtual DOM</li>
+    <li>Leichtgewichtige Komponenten</li>
+    <li>Vergleich zwischen alten und neuen Komponentenbaum</li>
+    <li>Nur Änderungen werden ins ‚richtige‘ DOM eingebaut</li>
+  </ul>
+</section>
+
+<section>
+  <h3 id="vergleicht-mit-angular-2">Vergleicht mit Angular 2</h3>
+
+  <ul>
+    <li><em>kein</em> <del>Virtual DOM</del></li>
+    <li>Benutzung von WebWorkern zum Event Dispatch (2 Threads)</li>
+    <li>Ìnterne Verwendung on <code class="highlighter-rouge">zone.js</code>: thread-local storage</li>
+    <li>Kann mit ‚Web Components‘ zusammen arbeiten</li>
+    <li>Support for ‚Shadow DOM‘</li>
+  </ul>
 </section>
 
 <section>
@@ -2288,8 +2312,23 @@ Traceur, Babel, Typescript</li>
 	<section  class="step slide" >
   <h1>Container</h1>
 
-  <section></section>
-<section></section>
+  <section id="fragments">
+  <ul>
+    <li data-fragment-index="1" class="fragment">Wenn benachbarte Komponenten den gleichen Zustand benötigen</li>
+    <li data-fragment-index="2" class="fragment">Dann kann man den Zustand nach oben verschieben</li>
+    <li data-fragment-index="3" class="fragment">Und die Komponenten rein funktional machen</li>
+    <li data-fragment-index="4" class="fragment">Der Container verteilt den Zustand als Props an die inneren 
+        Komponenten</li>
+    <li data-fragment-index="5" class="fragment">Ein Pattern, dass in vielen Flux Implementierungen unterstützt wird</li>
+  </ul>
+</section>
+
+<section>
+  <ul>
+    <li>https://facebook.github.io/react/docs/lifting-state-up.html</li>
+    <li>http://alt.js.org/docs/components/altContainer/</li>
+  </ul>
+</section>
 
 </section>
 	<div class="page-break"></div>
