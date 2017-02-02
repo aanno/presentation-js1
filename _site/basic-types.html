@@ -98,16 +98,16 @@
   <h3 id="void-null-undefined-and-never">Void, Null, Undefined, and Never</h3>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">warnUser</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="na">unusable</span><span class="p">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="nx">unusable</span><span class="err">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
 
 <span class="c1">// Not much else we can assign to these variables!</span>
-<span class="kd">let</span> <span class="na">u</span><span class="p">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
-<span class="kd">let</span> <span class="na">n</span><span class="p">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">let</span> <span class="nx">u</span><span class="err">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="nx">n</span><span class="err">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
 
 <span class="c1">// Function returning never must have unreachable end point</span>
-<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="na">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">message</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="nx">never</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -117,7 +117,7 @@
 <span class="p">}</span>
 
 <span class="c1">// Function returning never must have unreachable end point</span>
-<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">():</span> <span class="nx">never</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">()</span><span class="err">:</span> <span class="nx">never</span> <span class="p">{</span>
     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
@@ -165,7 +165,7 @@
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">arg</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">);</span>  <span class="c1">// type of output will be 'string'</span>
+<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">)</span>  <span class="c1">// type of output will be 'string'</span>
 
 <span class="kr">interface</span> <span class="nx">Lengthwise</span> <span class="p">{</span>
     <span class="nl">length</span><span class="p">:</span> <span class="kr">number</span>

@@ -20,7 +20,7 @@ interface IWelcome {
 
 class Welcome extends React.Component<IWelcome, {}> {
   render() {
-    return <h1>Hello, {this.props.name}</h1>;
+    return <h1>Hello, {this.props.name}</h1>
   }
 }
 {% endhighlight %}
@@ -68,14 +68,14 @@ class Clock extends React.Component<{}, IClockComponentState> {
 
   constructor(props) {
     super(props);
-    this.state = {date: new Date()};
+    this.state = {date: new Date()}
   }
 
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
       1000
-    );
+    )
   }
 
   componentWillUnmount() {

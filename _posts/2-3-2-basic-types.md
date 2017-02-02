@@ -72,7 +72,7 @@ list[1] = 100
 
 {% highlight typescript %}
 function warnUser(): void {
-    alert("This is my warning message");
+    alert("This is my warning message")
 }
 let unusable: void = undefined
 
@@ -145,7 +145,7 @@ let mySquare = createSquare({color: "black"})
 function identity<T>(arg: T): T {
     return arg
 }
-let output = identity("myString");  // type of output will be 'string'
+let output = identity("myString")  // type of output will be 'string'
 
 interface Lengthwise {
     length: number

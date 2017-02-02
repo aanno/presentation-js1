@@ -44,7 +44,7 @@ function Person(age) {
 let person = new Person(1)
 setTimeout(person.growOld,1000)
 
-setTimeout(function() { console.log(person.age); },2000)
+setTimeout(function() { console.log(person.age) },2000)
 // 1, should have been 2
 {% endhighlight %}
 

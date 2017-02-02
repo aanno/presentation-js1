@@ -45,11 +45,11 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="s1">'Hello, world!'</span>
 
 <span class="c1">// Proxying a function object</span>
-<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span> <span class="p">}</span>
 <span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">apply</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s1">'I am the proxy'</span>

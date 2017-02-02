@@ -25,7 +25,7 @@ let ownerArr = [{
 }, {
     "owner": "John",
     "pets": [{"name":"dog3"}, {"name": "dog4"}],
-}];
+}]
 
 // Array's map method.
 ownerArr.map(function(owner){
@@ -33,7 +33,7 @@ ownerArr.map(function(owner){
 })
 
 // Lodash
-_.map(ownerArr, 'pets[0].name');
+_.map(ownerArr, 'pets[0].name')
 
 {% endhighlight %}
 
@@ -53,7 +53,7 @@ let objA = {
 // Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript
 
 // Lodash
-let objB = _.cloneDeep(objA);
+let objB = _.cloneDeep(objA)
 objB === objA // false
 
 {% endhighlight %}
@@ -86,7 +86,7 @@ _.assign(objA, objB, objC)
 
 // Naive method: Remove an array of keys from object
 Object.prototype.remove = function(arr) {
-    let that = this;
+    let that = this
     arr.forEach(function(key){
         delete(that[key])
     })
@@ -94,7 +94,7 @@ Object.prototype.remove = function(arr) {
 
 let objA = {"name": "colin", "car": "suzuki", "age": 17}
 objA.remove(['car', 'age'])
-objA; // {"name": "colin"}
+objA // {"name": "colin"}
 
 // Lodash
 objA = _.omit(objA, ['car', 'age']) // {"name": "colin"}

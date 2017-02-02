@@ -12,11 +12,11 @@ let handler = {
   }
 }
 
-let p = new Proxy(target, handler);
+let p = new Proxy(target, handler)
 p.world === 'Hello, world!'
 
 // Proxying a function object
-let target = function () { return 'I am the target'; };
+let target = function () { return 'I am the target' }
 let handler = {
   apply: function (receiver, ...args) {
     return 'I am the proxy'

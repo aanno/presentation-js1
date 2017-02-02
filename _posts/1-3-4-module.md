@@ -27,7 +27,7 @@ module.exports = {
 ### Import
 
 {% highlight javascript %}
-var greetings = require("./greetings.js");
+var greetings = require("./greetings.js")
 {% endhighlight %}
 
 </section>

@@ -28,7 +28,7 @@ Courtesy of [JS Event Loop Explained](http://blog.carbonfive.com/2013/10/27/the-
 **Event Loop** basiert <br/>
     {% highlight javascript %}
     while(queue.waitForMessage()){
-      queue.processNextMessage();
+      queue.processNextMessage()
     }
     {% endhighlight %}
     

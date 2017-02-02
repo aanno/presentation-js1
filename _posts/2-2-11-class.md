@@ -20,7 +20,7 @@ class SkinnedMesh extends THREE.Mesh {
     super.update()
   }
   get boneCount() {
-    return this.bones.length;
+    return this.bones.length
   }
   set matrixType(matrixType) {
     this.idMatrix = SkinnedMesh[matrixType]()

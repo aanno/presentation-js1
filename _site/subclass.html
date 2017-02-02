@@ -48,13 +48,13 @@
 
 <span class="c1">// User code of Array subclass</span>
 <span class="kr">class</span> <span class="nx">MyArray</span> <span class="kr">extends</span> <span class="nb">Array</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span> <span class="p">}</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// Two-phase 'new':</span>
 <span class="c1">// 1) Call @@create to allocate object</span>
 <span class="c1">// 2) Invoke constructor on new instance</span>
-<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">()</span>
 <span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
 <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span></code></pre></figure>
 

@@ -353,7 +353,7 @@
 
   <h3 id="import">Import</h3>
 
-  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">greetings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./greetings.js"</span><span class="p">);</span></code></pre></figure>
+  <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">greetings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./greetings.js"</span><span class="p">)</span></code></pre></figure>
 
 </section>
 
@@ -405,7 +405,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
   <p><strong>Event Loop</strong> basiert <br /></p>
 
   <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="k">while</span><span class="p">(</span><span class="nx">queue</span><span class="p">.</span><span class="nx">waitForMessage</span><span class="p">()){</span>
-      <span class="nx">queue</span><span class="p">.</span><span class="nx">processNextMessage</span><span class="p">();</span>
+      <span class="nx">queue</span><span class="p">.</span><span class="nx">processNextMessage</span><span class="p">()</span>
     <span class="p">}</span>
     </code></pre></figure>
 
@@ -586,7 +586,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
 <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
     <span class="s2">"pets"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"dog3"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dog4"</span><span class="p">}],</span>
-<span class="p">}];</span>
+<span class="p">}]</span>
 
 <span class="c1">// Array's map method.</span>
 <span class="nx">ownerArr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">owner</span><span class="p">){</span>
@@ -594,7 +594,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
 <span class="p">})</span>
 
 <span class="c1">// Lodash</span>
-<span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">ownerArr</span><span class="p">,</span> <span class="s1">'pets[0].name'</span><span class="p">);</span></code></pre></figure>
+<span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">ownerArr</span><span class="p">,</span> <span class="s1">'pets[0].name'</span><span class="p">)</span></code></pre></figure>
 
 </section>
 
@@ -609,7 +609,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
 <span class="c1">// Normal method? Too long. See Stackoverflow for solution: http://stackoverflow.com/questions/4459928/how-to-deep-clone-in-javascript</span>
 
 <span class="c1">// Lodash</span>
-<span class="kd">let</span> <span class="nx">objB</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">objA</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">objB</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">cloneDeep</span><span class="p">(</span><span class="nx">objA</span><span class="p">)</span>
 <span class="nx">objB</span> <span class="o">===</span> <span class="nx">objA</span> <span class="c1">// false</span></code></pre></figure>
 
 </section>
@@ -634,7 +634,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
 
   <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Naive method: Remove an array of keys from object</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">remove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span>
     <span class="nx">arr</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">){</span>
         <span class="k">delete</span><span class="p">(</span><span class="nx">that</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
     <span class="p">})</span>
@@ -642,7 +642,7 @@ Courtesy of <a href="http://blog.carbonfive.com/2013/10/27/the-javascript-event-
 
 <span class="kd">let</span> <span class="nx">objA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"colin"</span><span class="p">,</span> <span class="s2">"car"</span><span class="p">:</span> <span class="s2">"suzuki"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">17</span><span class="p">}</span>
 <span class="nx">objA</span><span class="p">.</span><span class="nx">remove</span><span class="p">([</span><span class="s1">'car'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span>
-<span class="nx">objA</span><span class="p">;</span> <span class="c1">// {"name": "colin"}</span>
+<span class="nx">objA</span> <span class="c1">// {"name": "colin"}</span>
 
 <span class="c1">// Lodash</span>
 <span class="nx">objA</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">omit</span><span class="p">(</span><span class="nx">objA</span><span class="p">,</span> <span class="p">[</span><span class="s1">'car'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">])</span> <span class="c1">// {"name": "colin"}</span></code></pre></figure>
@@ -854,7 +854,7 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
 <span class="kd">let</span> <span class="nx">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">growOld</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span> <span class="p">},</span><span class="mi">2000</span><span class="p">)</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span> <span class="p">},</span><span class="mi">2000</span><span class="p">)</span>
 <span class="c1">// 1, should have been 2</span></code></pre></figure>
 
 </section>
@@ -888,7 +888,7 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
     <span class="c1">// Methods</span>
     <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
      <span class="c1">// Super calls</span>
-     <span class="k">return</span> <span class="s2">"d "</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+     <span class="k">return</span> <span class="s2">"d "</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
     <span class="p">},</span>
     <span class="c1">// Computed (dynamic) property names</span>
     <span class="p">[</span> <span class="s1">'prop_'</span> <span class="o">+</span> <span class="p">(()</span> <span class="o">=&gt;</span> <span class="mi">42</span><span class="p">)()</span> <span class="p">]:</span> <span class="mi">42</span>
@@ -927,7 +927,7 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
     <span class="kd">let</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="p">{</span>
       <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
-        <span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">pre</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">];</span>
+        <span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">pre</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">{</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="nx">cur</span> <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">}</span>
@@ -982,7 +982,7 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
   <span class="kd">let</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"key"</span><span class="p">)</span>
 
   <span class="kd">function</span> <span class="nx">MyClass</span><span class="p">(</span><span class="nx">privateData</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">privateData</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">privateData</span>
   <span class="p">}</span>
 
   <span class="nx">MyClass</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
@@ -1014,11 +1014,11 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="s1">'Hello, world!'</span>
 
 <span class="c1">// Proxying a function object</span>
-<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span> <span class="p">}</span>
 <span class="kd">let</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">apply</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="s1">'I am the proxy'</span>
@@ -1051,7 +1051,7 @@ Traceur, Babel (+ core-js), Typescript (+ core-js)</li>
     <span class="kr">super</span><span class="p">.</span><span class="nx">update</span><span class="p">()</span>
   <span class="p">}</span>
   <span class="nx">get</span> <span class="nx">boneCount</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bones</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">bones</span><span class="p">.</span><span class="nx">length</span>
   <span class="p">}</span>
   <span class="nx">set</span> <span class="nx">matrixType</span><span class="p">(</span><span class="nx">matrixType</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">[</span><span class="nx">matrixType</span><span class="p">]()</span>
@@ -1093,13 +1093,13 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
 
 <span class="c1">// User code of Array subclass</span>
 <span class="kr">class</span> <span class="nx">MyArray</span> <span class="kr">extends</span> <span class="nb">Array</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span> <span class="p">}</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// Two-phase 'new':</span>
 <span class="c1">// 1) Call @@create to allocate object</span>
 <span class="c1">// 2) Invoke constructor on new instance</span>
-<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">()</span>
 <span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
 <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span></code></pre></figure>
 
@@ -1260,16 +1260,16 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
   <h3 id="void-null-undefined-and-never">Void, Null, Undefined, and Never</h3>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">warnUser</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"This is my warning message"</span><span class="p">)</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="na">unusable</span><span class="p">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="nx">unusable</span><span class="err">:</span> <span class="k">void</span> <span class="o">=</span> <span class="kc">undefined</span>
 
 <span class="c1">// Not much else we can assign to these variables!</span>
-<span class="kd">let</span> <span class="na">u</span><span class="p">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
-<span class="kd">let</span> <span class="na">n</span><span class="p">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">let</span> <span class="nx">u</span><span class="err">:</span> <span class="kc">undefined</span> <span class="o">=</span> <span class="kc">undefined</span>
+<span class="kd">let</span> <span class="nx">n</span><span class="err">:</span> <span class="kc">null</span> <span class="o">=</span> <span class="kc">null</span>
 
 <span class="c1">// Function returning never must have unreachable end point</span>
-<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="na">message</span><span class="p">:</span> <span class="kr">string</span><span class="p">):</span> <span class="nx">never</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">message</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="nx">never</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -1279,7 +1279,7 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
 <span class="p">}</span>
 
 <span class="c1">// Function returning never must have unreachable end point</span>
-<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">():</span> <span class="nx">never</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nx">infiniteLoop</span><span class="p">()</span><span class="err">:</span> <span class="nx">never</span> <span class="p">{</span>
     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
@@ -1327,7 +1327,7 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="err">:</span> <span class="nx">T</span><span class="p">)</span><span class="err">:</span> <span class="nx">T</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">arg</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">);</span>  <span class="c1">// type of output will be 'string'</span>
+<span class="kd">let</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="s2">"myString"</span><span class="p">)</span>  <span class="c1">// type of output will be 'string'</span>
 
 <span class="kr">interface</span> <span class="nx">Lengthwise</span> <span class="p">{</span>
     <span class="nl">length</span><span class="p">:</span> <span class="kr">number</span>
@@ -1480,12 +1480,12 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
   <h3 id="interfaces-mit-selben-namen">2 Interfaces mit selben Namen…</h3>
 
   <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
-    <span class="nx">doIt</span><span class="p">();</span>
+    <span class="nx">doIt</span><span class="p">()</span>
 <span class="p">}</span></code></pre></figure>
 
   <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
-    <span class="nx">doSomething</span><span class="p">();</span>
-    <span class="nx">doSomethingDifferent</span><span class="p">();</span>
+    <span class="nx">doSomething</span><span class="p">()</span>
+    <span class="nx">doSomethingDifferent</span><span class="p">()</span>
 <span class="p">}</span></code></pre></figure>
 
 </section>
@@ -1495,9 +1495,9 @@ z.B. kein Zugriff auf Properties ohne <code class="highlighter-rouge">this</code
   <h3 id="werden-zu">…werden zu</h3>
 
   <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kr">interface</span> <span class="nx">Foo</span> <span class="p">{</span>
-    <span class="nx">doSomething</span><span class="p">();</span>
-    <span class="nx">doSomethingDifferent</span><span class="p">();</span>
-    <span class="nx">doIt</span><span class="p">();</span>
+    <span class="nx">doSomething</span><span class="p">()</span>
+    <span class="nx">doSomethingDifferent</span><span class="p">()</span>
+    <span class="nx">doIt</span><span class="p">()</span>
 <span class="p">}</span></code></pre></figure>
 
 </section>
@@ -2005,7 +2005,7 @@ Traceur, Babel, Typescript</li>
 
 <span class="kr">class</span> <span class="nx">Welcome</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IWelcome</span><span class="p">,</span> <span class="p">{}</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1&gt;</span><span class="err">;
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>  <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -2053,14 +2053,14 @@ Traceur, Babel, Typescript</li>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">date</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">date</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()}</span>
   <span class="p">}</span>
 
   <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">timerID</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span>
       <span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">tick</span><span class="p">(),</span>
       <span class="mi">1000</span>
-    <span class="p">);</span>
+    <span class="p">)</span>
   <span class="p">}</span>
 
   <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
@@ -2353,20 +2353,20 @@ Traceur, Babel, Typescript</li>
 
 <span class="kr">class</span> <span class="nx">NameForm</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="p">{},</span> <span class="nx">INameFormState</span><span class="o">&gt;</span> <span class="p">{</span>
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">value</span><span class="p">:</span> <span class="s1">''</span><span class="p">};</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span><span class="na">value</span><span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
 
-    <span class="k">this</span><span class="p">.</span><span class="nx">handleChange</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleChange</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handleChange</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleChange</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
   <span class="p">}</span>
 
   <span class="nx">handleChange</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">value</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">});</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">value</span><span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">})</span>
   <span class="p">}</span>
 
   <span class="nx">handleSubmit</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'A name was submitted: '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
-    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'A name was submitted: '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
   <span class="p">}</span>
 
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
@@ -2378,7 +2378,7 @@ Traceur, Babel, Typescript</li>
 </span>        <span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
 </span>        <span class="o">&lt;</span><span class="nx">input</span> <span class="kd">type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"Submit"</span> <span class="o">/&gt;</span>
       <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
-</span>    <span class="p">);</span>
+</span>    <span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 

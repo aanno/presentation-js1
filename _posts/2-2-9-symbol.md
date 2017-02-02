@@ -10,7 +10,7 @@ let MyClass = (function() {
   let key = Symbol("key")
 
   function MyClass(privateData) {
-    this[key] = privateData;
+    this[key] = privateData
   }
 
   MyClass.prototype = {

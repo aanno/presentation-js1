@@ -9,14 +9,14 @@ id: ts-merging
 
 {% highlight javascript %}
 interface Foo {
-    doIt();
+    doIt()
 }
 {% endhighlight %}
 
 {% highlight javascript %}
 interface Foo {
-    doSomething();
-    doSomethingDifferent();
+    doSomething()
+    doSomethingDifferent()
 }
 {% endhighlight %}
 
@@ -28,9 +28,9 @@ interface Foo {
 
 {% highlight typescript %}
 interface Foo {
-    doSomething();
-    doSomethingDifferent();
-    doIt();
+    doSomething()
+    doSomethingDifferent()
+    doIt()
 }
 {% endhighlight %}
 
