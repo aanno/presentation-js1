@@ -7,8 +7,6 @@ id: flux-historie
 * Ursprünglich Pattern _und_ Implementierung von Facebook
 * Implementierung ab Mitte 2014 auf github
 * Mittlerweile gibt es viele (bessere!) Flux Implementierungen
-* Besonders angesagt: Redux 
-* In Wroomer verwendet: Alt
 </section>
 
 <section markdown="1">

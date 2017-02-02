@@ -9,7 +9,6 @@ id: react-title
 1. [React Grundlagen](#/44)
 1. [React Komponenten](#/49)
 1. [Flux Grundlagen](#/56)
-1. [Alt Flux Implementierung](#/62)
 
 #### Thomas Pasch für [SiteOS](http://siteos.de/){: .external}
 </section>

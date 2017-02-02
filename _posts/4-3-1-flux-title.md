@@ -11,11 +11,6 @@ id: flux-title
 </section>
 
 <section markdown="1">
-* Top-Down Datenfluss
-* Besonders geeignet, wenn Zustand in einer unveränderlichen und flachen Datenstruktur
-</section>
-
-<section markdown="1">
 * https://facebook.github.io/flux/docs/in-depth-overview.html#content
 * https://medium.com/hacking-and-gonzo/flux-vs-mvc-design-patterns-57b28c0f71b7#.oh4jq95t0
 </section>
