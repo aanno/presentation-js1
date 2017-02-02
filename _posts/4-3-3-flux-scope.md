@@ -34,8 +34,8 @@ Courtesy of [Fluxxor - What is Flux?](http://fluxxor.com/what-is-flux.html){: .e
 
 <section markdown="1">
 
-    <img src="{{ site.url }}/assets/images/flux-complex.png" alt="Flux complex" style="width: 1200px;"/>{: .stretch}
-    Courtesy of [Fluxxor - What is Flux?](http://fluxxor.com/what-is-flux.html){: .external .small}.
+<img src="{{ site.url }}/assets/images/flux-complex.png" alt="Flux complex" style="width: 1200px;"/>{: .stretch}
+Courtesy of [Fluxxor - What is Flux?](http://fluxxor.com/what-is-flux.html){: .external .small}.
     
 </section>
 
